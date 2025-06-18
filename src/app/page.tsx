@@ -10,9 +10,9 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow container py-8">
+      <main className="flex-grow container py-8 gap-4  max-w-7xl mx-auto">
         <h1 className="text-4xl font-headline font-bold mb-8 text-center text-primary">
-          Welcome to ItemDrop!
+          Welcome to CS Skins!
         </h1>
         <p className="text-lg text-muted-foreground text-center mb-12">
           Browse our collection of legendary game items. Contact us to purchase.

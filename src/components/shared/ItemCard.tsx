@@ -19,7 +19,7 @@ export function ItemCard({ item }: ItemCardProps) {
             src={item.imageUrl}
             alt={item.name}
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
             className="rounded-t-lg"
             data-ai-hint={item.category.toLowerCase()}
           />

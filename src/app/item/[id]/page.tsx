@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 
 export default async function ItemDetailPage({ params }: { params: { id: string } }) {
-  const item: Item | undefined = await getItemById(params.id);
+  const item: Item | null = await getItemById(params.id);
 
   if (!item) {
     return (
@@ -56,7 +56,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow container py-8">
+      <main className="flex-grow container py-8 max-w-7xl mx-auto">
         <div className="mb-8">
           <Button asChild variant="outline">
             <Link href="/">
@@ -72,7 +72,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
                 src={item.imageUrl}
                 alt={item.name}
                 layout="fill"
-                objectFit="cover"
+                objectFit="contain"
                 data-ai-hint={item.category.toLowerCase()}
               />
             </div>

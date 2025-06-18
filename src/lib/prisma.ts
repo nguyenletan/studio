@@ -1,3 +1,4 @@
+
 import { PrismaClient } from '@prisma/client';
 
 declare global {
@@ -5,11 +6,15 @@ declare global {
   var prisma: PrismaClient | undefined;
 }
 
-// Conditionally set datasource URL for production if RUNTIME_DATABASE_URL (e.g., Accelerate) is provided.
-// DATABASE_URL will be used for local development and for `prisma migrate deploy` during Vercel build.
-const dataSourceUrl = process.env.NODE_ENV === 'production' && process.env.RUNTIME_DATABASE_URL
-  ? process.env.RUNTIME_DATABASE_URL
-  : process.env.DATABASE_URL;
+// Normalize RUNTIME_DATABASE_URL if it uses the older "prisma+postgres://" scheme
+let runtimeDbUrl = process.env.RUNTIME_DATABASE_URL;
+if (runtimeDbUrl && runtimeDbUrl.startsWith('prisma+postgres://')) {
+  runtimeDbUrl = runtimeDbUrl.replace('prisma+postgres://', 'prisma://');
+}
+
+const dataSourceUrl = process.env.NODE_ENV === 'production' && runtimeDbUrl
+  ? runtimeDbUrl // Use normalized Accelerate URL
+  : process.env.DATABASE_URL; // Direct URL for dev or Vercel build migrations (DATABASE_URL)
 
 const prisma = global.prisma || new PrismaClient({
   datasources: {

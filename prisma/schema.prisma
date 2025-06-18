@@ -1,10 +1,14 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Used for migrations if different from DATABASE_URL (e.g., pooling)
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  // Recommended for Vercel: native, and a musl variant.
+  // linux-arm64-openssl-1.1.x is also good for ARM-based Vercel environments.
+  binaryTargets = ["native", "linux-musl-openssl-1.1.x", "linux-arm64-openssl-1.1.x"]
 }
 
 model Item {

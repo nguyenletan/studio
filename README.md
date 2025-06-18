@@ -10,7 +10,7 @@ Follow these steps to get your local development environment set up and running.
 
 *   Node.js (LTS version recommended)
 *   npm or yarn
-*   Access to a PostgreSQL database
+*   Access to a PostgreSQL database (local or remote)
 
 ### 2. Clone the Repository
 
@@ -18,19 +18,19 @@ If you haven't already, clone this repository to your local machine.
 
 ### 3. Set Up Environment Variables
 
-You'll need to configure your database connection.
+You'll need to configure your database connection for local development.
 
 1.  Create a `.env` file in the root of the project by copying the example:
     ```bash
-    cp .env.example .env
+    cp .env.example .env 
     ```
     If `.env.example` doesn't exist, simply create a new file named `.env`.
 
-2.  Add your PostgreSQL database connection string to the `.env` file. It should look something like this:
+2.  Add your **direct PostgreSQL database connection string** to the `.env` file. It should look something like this:
     ```env
-    DATABASE_URL="prisma+postgres://YOUR_USER:YOUR_PASSWORD@YOUR_HOST:YOUR_PORT/YOUR_DATABASE?api_key=YOUR_PRISMA_ACCELERATE_API_KEY"
+    DATABASE_URL="postgresql://YOUR_USER:YOUR_PASSWORD@YOUR_HOST:YOUR_PORT/YOUR_DATABASE"
     ```
-    Replace `YOUR_USER`, `YOUR_PASSWORD`, `YOUR_HOST`, `YOUR_PORT`, `YOUR_DATABASE`, and `YOUR_PRISMA_ACCELERATE_API_KEY` with your actual PostgreSQL and Prisma Accelerate details.
+    Replace `YOUR_USER`, `YOUR_PASSWORD`, `YOUR_HOST`, `YOUR_PORT`, and `YOUR_DATABASE` with your actual PostgreSQL details. **This must be a direct connection string, not a Prisma Accelerate or Data Proxy URL, for local migrations (`prisma migrate dev`) to work.**
 
     The admin panel also has default credentials which can be overridden via environment variables:
     ```env
@@ -99,13 +99,42 @@ This project requires two development servers to run concurrently: one for the N
 *   `npm run dev`: Starts the Next.js development server with Turbopack.
 *   `npm run genkit:dev`: Starts the Genkit development server.
 *   `npm run genkit:watch`: Starts the Genkit development server with watch mode.
-*   `npm run build`: Builds the Next.js application for production.
+*   `npm run build`: Builds the Next.js application for production (without running Prisma migrations).
+*   `npm run vercel-build`: Builds the application for Vercel, including Prisma client generation and migration deployment.
 *   `npm run start`: Starts the Next.js production server.
 *   `npm run lint`: Lints the codebase using Next.js's built-in ESLint configuration.
 *   `npm run typecheck`: Runs TypeScript type checking.
-*   `npx prisma migrate dev`: Applies database migrations.
+*   `npx prisma migrate dev`: Applies database migrations for local development.
 *   `npx prisma db seed`: Seeds the database.
 *   `npx prisma studio`: Opens Prisma Studio to view and manage your database.
+
+## Deploying to Vercel
+
+Follow these steps to deploy your application to Vercel:
+
+1.  **Push your code to a Git repository** (GitHub, GitLab, Bitbucket).
+2.  **Import your project into Vercel.**
+3.  **Configure Environment Variables in Vercel**:
+    Go to your project settings in Vercel and add the following environment variables:
+    *   `DATABASE_URL`: Your **direct PostgreSQL connection string**. This is used by `prisma migrate deploy` during the Vercel build. Example: `postgresql://USER:PASSWORD@HOST:PORT/DATABASE`.
+    *   `RUNTIME_DATABASE_URL`: Your **Prisma Accelerate connection string** (if you are using Accelerate). This is used by the application at runtime. Example: `prisma+postgres://accelerate.prisma-data.net/?api_key=YOUR_ACCELERATE_API_KEY`. If you are not using Accelerate, you can set this to the same value as `DATABASE_URL` or omit it if your application doesn't conditionally use it.
+    *   `ADMIN_USERNAME`: Your desired admin username.
+    *   `ADMIN_PASSWORD`: Your desired admin password.
+    *   Any other environment variables your application might need (e.g., API keys for Genkit if not using defaults).
+
+4.  **Build Settings**:
+    Vercel should automatically detect that this is a Next.js project.
+    The `package.json` includes a `vercel-build` script:
+    ```json
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    ```
+    Vercel will use this script to:
+    *   Install dependencies.
+    *   Generate the Prisma Client (`prisma generate`).
+    *   Apply any pending database migrations (`prisma migrate deploy`).
+    *   Build the Next.js application (`next build`).
+
+5.  **Deploy!** Vercel will build and deploy your application. Migrations are handled automatically as part of the build process, so no manual migration commands are needed on Vercel after deployment.
 
 ## Project Structure
 

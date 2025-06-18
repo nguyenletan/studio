@@ -1,3 +1,4 @@
+
 import { getItems } from '@/lib/data';
 import type { Item } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -60,7 +61,7 @@ export default async function AdminItemsPage() {
                         width={50}
                         height={50}
                         className="rounded-md object-cover aspect-square"
-                        data-ai-hint="item thumbnail"
+                        data-ai-hint={item.category.toLowerCase()}
                       />
                     </TableCell>
                     <TableCell className="font-medium">{item.name}</TableCell>

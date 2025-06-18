@@ -1,3 +1,4 @@
+
 import type { Item } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -20,7 +21,7 @@ export function ItemCard({ item }: ItemCardProps) {
             layout="fill"
             objectFit="cover"
             className="rounded-t-lg"
-            data-ai-hint={`${item.category} game item`}
+            data-ai-hint={item.category.toLowerCase()}
           />
         </div>
       </CardHeader>

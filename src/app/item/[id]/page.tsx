@@ -1,3 +1,4 @@
+
 import { getItemById } from '@/lib/data';
 import type { Item } from '@/types';
 import { Header } from '@/components/shared/Header';
@@ -72,7 +73,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
                 alt={item.name}
                 layout="fill"
                 objectFit="cover"
-                data-ai-hint={`${item.category} game item detail`}
+                data-ai-hint={item.category.toLowerCase()}
               />
             </div>
             <div className="p-6 md:p-8 flex flex-col">

@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
@@ -6,6 +7,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 export const metadata: Metadata = {
   title: 'ItemDrop - Game Item Marketplace',
   description: 'List and find game items for sale.',
+  icons: {
+    icon: 'data:,', // Use an empty data URI to prevent default favicon handling
+  },
 };
 
 export default function RootLayout({

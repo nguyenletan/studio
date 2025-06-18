@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,7 +20,7 @@ import { useFormState } from 'react-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
-import { Save, Trash2, Loader2 } from 'lucide-react';
+import { Save, Trash2, Loader2, Images } from 'lucide-react';
 import type { ItemFormState } from '@/lib/actions';
 import {
   AlertDialog,
@@ -38,7 +39,7 @@ const itemFormSchema = z.object({
   description: z.string().min(10, { message: 'Description must be at least 10 characters long.' }),
   longDescription: z.string().optional(),
   price: z.coerce.number().min(0, { message: 'Price must be a positive number.' }),
-  imageUrl: z.string().url({ message: 'Please enter a valid URL.' }).min(1, 'Image URL is required'),
+  imageUrl: z.string().url({ message: 'Please enter a valid URL.' }).optional().or(z.literal('')),
   category: z.string().min(1, { message: 'Category is required.' }),
 });
 
@@ -58,6 +59,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
   const formRef = useRef<HTMLFormElement>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | undefined>(item?.imageUrl);
 
 
   const form = useForm<ItemFormValues>({
@@ -68,7 +70,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
           description: item.description,
           longDescription: item.longDescription || '',
           price: item.price,
-          imageUrl: item.imageUrl,
+          imageUrl: item.imageUrl || '',
           category: item.category,
         }
       : {
@@ -88,10 +90,21 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
           title: isEditMode ? 'Update Successful' : 'Creation Successful',
           description: formState.message,
         });
-        if (!isEditMode) { // Only reset and redirect on create
-          form.reset(); // Reset form fields
+        if (formState.generatedImageUrl) {
+          setPreviewUrl(formState.generatedImageUrl);
+          if (isEditMode && item) {
+             // eslint-disable-next-line no-param-reassign
+             item.imageUrl = formState.generatedImageUrl; // Update item in place for preview
+          }
         }
-        router.push('/admin/items'); // Redirect to items list
+        if (!isEditMode) { 
+          form.reset(); 
+          setPreviewUrl(undefined);
+        }
+        // Only redirect if not explicitly staying on page (e.g. due to image generation)
+        if (!formState.generatedImageUrl || !isEditMode) {
+          router.push('/admin/items'); 
+        }
       } else {
         toast({
           variant: 'destructive',
@@ -102,20 +115,19 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
     }
     if (formState?.errors) {
       // Set form errors manually if needed, or rely on zodResolver
-      // For example, form.setError('name', { type: 'manual', message: formState.errors.name?.[0] })
     }
-    setIsSubmitting(false); // Always reset submitting state
-  }, [formState, toast, form, router, isEditMode]);
+    setIsSubmitting(false); 
+  }, [formState, toast, form, router, isEditMode, item]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData(event.currentTarget);
-    await form.trigger(); // Trigger validation
+    await form.trigger(); 
     if (form.formState.isValid) {
       dispatchFormAction(formData);
     } else {
-      setIsSubmitting(false); // Validation failed
+      setIsSubmitting(false); 
       toast({
         variant: 'destructive',
         title: 'Validation Error',
@@ -136,6 +148,15 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
     }
     setIsDeleting(false);
   };
+
+  useEffect(() => {
+    const subscription = form.watch((value, { name }) => {
+      if (name === 'imageUrl') {
+        setPreviewUrl(value.imageUrl);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [form]);
 
 
   return (
@@ -213,14 +234,28 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
           name="imageUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Image URL</FormLabel>
+              <FormLabel>Image URL (Optional - will be auto-generated if left empty or placeholder)</FormLabel>
               <FormControl>
-                <Input placeholder="https://placehold.co/600x400.png" {...field} />
+                <Input 
+                  placeholder="Leave empty or https://placehold.co/600x400.png to auto-generate" 
+                  {...field} 
+                  onChange={(e) => {
+                    field.onChange(e);
+                    setPreviewUrl(e.target.value);
+                  }}
+                />
               </FormControl>
               <FormMessage />
-              {field.value && (
+              {previewUrl && (
                 <div className="mt-2">
-                  <img src={field.value} alt="Preview" className="h-32 w-auto rounded-md object-cover border" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={previewUrl} alt="Preview" className="h-32 w-auto rounded-md object-cover border" />
+                </div>
+              )}
+              {!previewUrl && !field.value && (
+                <div className="mt-2 p-4 border border-dashed rounded-md text-center text-muted-foreground">
+                  <Images className="mx-auto h-10 w-10 mb-2" />
+                  <p>An image will be auto-generated upon saving if this field is empty or a placeholder.</p>
                 </div>
               )}
             </FormItem>

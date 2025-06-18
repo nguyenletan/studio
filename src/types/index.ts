@@ -6,6 +6,8 @@ export interface Item {
   price: number;
   imageUrl: string;
   category: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface AdminUser {

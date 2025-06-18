@@ -7,7 +7,7 @@
     "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
     "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
     "build": "next build",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "vercel-build": "prisma generate --no-engine && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"

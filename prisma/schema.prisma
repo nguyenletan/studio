@@ -1,24 +1,23 @@
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL") // Used for migrations if different from DATABASE_URL (e.g., pooling)
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  //directUrl = env("DIRECT_URL") // Used for migrations if different from DATABASE_URL (e.g., pooling)
 }
 
 generator client {
   provider      = "prisma-client-js"
-  // Recommended for Vercel: native, and a musl variant.
-  // linux-arm64-openssl-1.1.x is also good for ARM-based Vercel environments.
-  binaryTargets = ["native", "linux-musl-openssl-1.1.x", "linux-arm64-openssl-1.1.x"]
+  // Keep “native” for local development and “linux-musl” for Vercel/Alpine containers.
+  binaryTargets = ["native", "linux-musl", "linux-arm64-openssl-3.0.x"]
 }
 
 model Item {
-  id              String    @id @default(cuid())
+  id              String   @id @default(cuid())
   name            String
   description     String
   longDescription String?
   price           Float
   imageUrl        String
   category        String
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }

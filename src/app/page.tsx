@@ -8,23 +8,25 @@ export default async function HomePage() {
   const items: Item[] = await getItems();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex-grow container py-8 gap-4  max-w-7xl mx-auto">
-        <h1 className="text-4xl font-headline font-bold mb-8 text-center text-primary">
+      <main className="container mx-auto max-w-7xl flex-grow  gap-4 py-8">
+        <h1 className="font-headline mb-8 text-center text-4xl font-bold text-primary">
           Welcome to CS Skins!
         </h1>
-        <p className="text-lg text-muted-foreground text-center mb-12">
+        <p className="mb-12 text-center text-lg text-muted-foreground">
           Browse our collection of legendary game items. Contact us to purchase.
         </p>
         {items.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {items.map((item) => (
               <ItemCard key={item.id} item={item} />
             ))}
           </div>
         ) : (
-          <p className="text-center text-muted-foreground text-xl">No items currently available. Check back soon!</p>
+          <p className="text-center text-xl text-muted-foreground">
+            No items currently available. Check back soon!
+          </p>
         )}
       </main>
       <Footer />

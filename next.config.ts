@@ -1,4 +1,4 @@
-import type {NextConfig} from 'next';
+import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin({
@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: '**', // <- match every host
-        port: '',       // <- any port
+        port: '', // <- any port
         pathname: '**', // <- any path
       },
     ],

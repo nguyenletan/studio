@@ -1,4 +1,3 @@
-
 import { getItems } from '@/lib/data';
 import type { Item } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -24,7 +23,7 @@ export default async function AdminItemsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-headline font-bold">Manage Items</h1>
+          <h1 className="font-headline text-3xl font-bold">Manage Items</h1>
           <p className="text-muted-foreground">View, edit, or add new game items.</p>
         </div>
         <Button asChild>
@@ -60,14 +59,16 @@ export default async function AdminItemsPage() {
                         alt={item.name}
                         width={50}
                         height={50}
-                        className="rounded-md object-cover aspect-square"
+                        className="aspect-square rounded-md object-cover"
                         data-ai-hint={item.category.toLowerCase()}
                       />
                     </TableCell>
                     <TableCell className="font-medium">{item.name}</TableCell>
-                    <TableCell><Badge variant="outline">{item.category}</Badge></TableCell>
+                    <TableCell>
+                      <Badge variant="outline">{item.category}</Badge>
+                    </TableCell>
                     <TableCell className="text-right">{item.price.toLocaleString()} Gold</TableCell>
-                    <TableCell className="text-center space-x-2">
+                    <TableCell className="space-x-2 text-center">
                       <Button variant="outline" size="icon" asChild title="Edit Item">
                         <Link href={`/admin/items/${item.id}/edit`}>
                           <Edit3 className="h-4 w-4" />
@@ -80,8 +81,8 @@ export default async function AdminItemsPage() {
               </TableBody>
             </Table>
           ) : (
-            <div className="text-center py-12">
-              <PackageSearch className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
+            <div className="py-12 text-center">
+              <PackageSearch className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
               <p className="text-xl font-semibold text-muted-foreground">No items found.</p>
               <p className="text-sm text-muted-foreground">Get started by adding a new item.</p>
               <Button asChild className="mt-4">

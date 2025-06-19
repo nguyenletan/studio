@@ -1,4 +1,3 @@
-
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -32,7 +31,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from '@/components/ui/alert-dialog';
 
 const itemFormSchema = z.object({
   name: z.string().min(3, { message: 'Name must be at least 3 characters long.' }),
@@ -60,7 +59,6 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | undefined>(item?.imageUrl);
-
 
   const form = useForm<ItemFormValues>({
     resolver: zodResolver(itemFormSchema),
@@ -93,17 +91,17 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
         if (formState.generatedImageUrl) {
           setPreviewUrl(formState.generatedImageUrl);
           if (isEditMode && item) {
-             // eslint-disable-next-line no-param-reassign
-             item.imageUrl = formState.generatedImageUrl; // Update item in place for preview
+            // eslint-disable-next-line no-param-reassign
+            item.imageUrl = formState.generatedImageUrl; // Update item in place for preview
           }
         }
-        if (!isEditMode) { 
-          form.reset(); 
+        if (!isEditMode) {
+          form.reset();
           setPreviewUrl(undefined);
         }
         // Only redirect if not explicitly staying on page (e.g. due to image generation)
         if (!formState.generatedImageUrl || !isEditMode) {
-          router.push('/admin/items'); 
+          router.push('/admin/items');
         }
       } else {
         toast({
@@ -116,18 +114,18 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
     if (formState?.errors) {
       // Set form errors manually if needed, or rely on zodResolver
     }
-    setIsSubmitting(false); 
+    setIsSubmitting(false);
   }, [formState, toast, form, router, isEditMode, item]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData(event.currentTarget);
-    await form.trigger(); 
+    await form.trigger();
     if (form.formState.isValid) {
       dispatchFormAction(formData);
     } else {
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
       toast({
         variant: 'destructive',
         title: 'Validation Error',
@@ -135,7 +133,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
       });
     }
   };
-  
+
   const handleDelete = async () => {
     if (!item || !item.id || !deleteAction) return;
     setIsDeleting(true);
@@ -157,7 +155,6 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
     });
     return () => subscription.unsubscribe();
   }, [form]);
-
 
   return (
     <Form {...form}>
@@ -182,7 +179,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
             <FormItem>
               <FormLabel>Short Description</FormLabel>
               <FormControl>
-                <Textarea placeholder="A legendary sword of immense power." {...field} rows={3}/>
+                <Textarea placeholder="A legendary sword of immense power." {...field} rows={3} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -195,13 +192,17 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
             <FormItem>
               <FormLabel>Long Description (Optional)</FormLabel>
               <FormControl>
-                <Textarea placeholder="Detailed lore and attributes of the item..." {...field} rows={6} />
+                <Textarea
+                  placeholder="Detailed lore and attributes of the item..."
+                  {...field}
+                  rows={6}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <FormField
             control={form.control}
             name="price"
@@ -234,11 +235,13 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
           name="imageUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Image URL (Optional - will be auto-generated if left empty or placeholder)</FormLabel>
+              <FormLabel>
+                Image URL (Optional - will be auto-generated if left empty or placeholder)
+              </FormLabel>
               <FormControl>
-                <Input 
-                  placeholder="Leave empty or https://placehold.co/600x400.png to auto-generate" 
-                  {...field} 
+                <Input
+                  placeholder="Leave empty or https://placehold.co/600x400.png to auto-generate"
+                  {...field}
                   onChange={(e) => {
                     field.onChange(e);
                     setPreviewUrl(e.target.value);
@@ -249,35 +252,56 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
               {previewUrl && (
                 <div className="mt-2">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={previewUrl} alt="Preview" className="h-32 w-auto rounded-md object-cover border" />
+                  <img
+                    src={previewUrl}
+                    alt="Preview"
+                    className="h-32 w-auto rounded-md border object-cover"
+                  />
                 </div>
               )}
               {!previewUrl && !field.value && (
-                <div className="mt-2 p-4 border border-dashed rounded-md text-center text-muted-foreground">
-                  <Images className="mx-auto h-10 w-10 mb-2" />
-                  <p>An image will be auto-generated upon saving if this field is empty or a placeholder.</p>
+                <div className="mt-2 rounded-md border border-dashed p-4 text-center text-muted-foreground">
+                  <Images className="mx-auto mb-2 h-10 w-10" />
+                  <p>
+                    An image will be auto-generated upon saving if this field is empty or a
+                    placeholder.
+                  </p>
                 </div>
               )}
             </FormItem>
           )}
         />
-        
+
         {formState?.errors?._form && (
-          <FormMessage className="text-destructive-foreground bg-destructive p-3 rounded-md">
+          <FormMessage className="rounded-md bg-destructive p-3 text-destructive-foreground">
             {formState.errors._form.join(', ')}
           </FormMessage>
         )}
 
-        <div className="flex justify-between items-center pt-4">
+        <div className="flex items-center justify-between pt-4">
           <Button type="submit" disabled={isSubmitting || isDeleting}>
-            {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-            {isSubmitting ? (isEditMode ? 'Saving...' : 'Creating...') : (isEditMode ? 'Save Changes' : 'Create Item')}
+            {isSubmitting ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <Save className="mr-2 h-4 w-4" />
+            )}
+            {isSubmitting
+              ? isEditMode
+                ? 'Saving...'
+                : 'Creating...'
+              : isEditMode
+                ? 'Save Changes'
+                : 'Create Item'}
           </Button>
           {isEditMode && deleteAction && item && (
-             <AlertDialog>
+            <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button type="button" variant="destructive" disabled={isDeleting || isSubmitting}>
-                  {isDeleting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Trash2 className="mr-2 h-4 w-4" />}
+                  {isDeleting ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <Trash2 className="mr-2 h-4 w-4" />
+                  )}
                   {isDeleting ? 'Deleting...' : 'Delete Item'}
                 </Button>
               </AlertDialogTrigger>
@@ -285,13 +309,17 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete the item
-                    "{item.name}".
+                    This action cannot be undone. This will permanently delete the item "{item.name}
+                    ".
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-destructive hover:bg-destructive/90">
+                  <AlertDialogAction
+                    onClick={handleDelete}
+                    disabled={isDeleting}
+                    className="bg-destructive hover:bg-destructive/90"
+                  >
                     {isDeleting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                     Confirm Delete
                   </AlertDialogAction>

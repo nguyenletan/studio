@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -6,7 +5,15 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { adminLogout } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import { LayoutDashboard, Package, PlusCircle, LogOut, Settings, Users, Gamepad2 } from 'lucide-react';
+import {
+  LayoutDashboard,
+  Package,
+  PlusCircle,
+  LogOut,
+  Settings,
+  Users,
+  Gamepad2,
+} from 'lucide-react';
 import {
   Sidebar,
   SidebarHeader,
@@ -39,9 +46,14 @@ export function AdminSidebar() {
   return (
     <Sidebar className="border-r" collapsible="icon">
       <SidebarHeader className="p-4">
-          <Link href="/" className="flex items-center space-x-2 group-data-[collapsible=icon]:justify-center">
+        <Link
+          href="/"
+          className="flex items-center space-x-2 group-data-[collapsible=icon]:justify-center"
+        >
           <Gamepad2 className="h-8 w-8 text-primary" />
-          <span className="font-headline text-xl font-bold group-data-[collapsible=icon]:hidden">ItemDrop Admin</span>
+          <span className="font-headline text-xl font-bold group-data-[collapsible=icon]:hidden">
+            ItemDrop Admin
+          </span>
         </Link>
       </SidebarHeader>
 
@@ -51,8 +63,11 @@ export function AdminSidebar() {
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
                 asChild
-                isActive={pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href))}
-                tooltip={{children: item.label, side: 'right'}}
+                isActive={
+                  pathname === item.href ||
+                  (item.href !== '/admin' && pathname.startsWith(item.href))
+                }
+                tooltip={{ children: item.label, side: 'right' }}
               >
                 <Link href={item.href}>
                   <item.icon />
@@ -61,30 +76,33 @@ export function AdminSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                isActive={pathname === '/admin/items/new'}
-                tooltip={{children: 'Add New Item', side: 'right'}}
-              >
-                <Link href="/admin/items/new">
-                  <PlusCircle />
-                  <span>Add New Item</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              isActive={pathname === '/admin/items/new'}
+              tooltip={{ children: 'Add New Item', side: 'right' }}
+            >
+              <Link href="/admin/items/new">
+                <PlusCircle />
+                <span>Add New Item</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>
 
       <SidebarFooter className="p-2">
-          <SidebarMenu>
+        <SidebarMenu>
           <SidebarMenuItem>
-              <SidebarMenuButton onClick={handleLogout} tooltip={{children: 'Logout', side: 'right'}}>
-                <LogOut />
-                <span>Logout</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
+            <SidebarMenuButton
+              onClick={handleLogout}
+              tooltip={{ children: 'Logout', side: 'right' }}
+            >
+              <LogOut />
+              <span>Logout</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
   );

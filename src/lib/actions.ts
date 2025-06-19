@@ -1,4 +1,3 @@
-
 'use server';
 
 import { revalidatePath } from 'next/cache';
@@ -21,7 +20,7 @@ export async function adminLogin(username?: string, password?: string) {
 // Logout Action
 export async function adminLogout() {
   await auth.logout();
-  revalidatePath('/admin/login'); 
+  revalidatePath('/admin/login');
   revalidatePath('/admin');
 }
 
@@ -49,7 +48,6 @@ export type ItemFormState = {
   success: boolean;
   generatedImageUrl?: string; // To pass back the URL of a newly generated image
 };
-
 
 // Create Item Action
 export async function createItemAction(
@@ -92,7 +90,7 @@ export async function createItemAction(
       // Optionally, add a non-blocking message to the user
     }
   }
-  
+
   const itemDataToSave: Omit<Item, 'id'> = {
     ...validatedFields.data,
     imageUrl: imageUrl, // Ensure imageUrl is always a string
@@ -100,15 +98,19 @@ export async function createItemAction(
 
   try {
     const newItem = await data.addItem(itemDataToSave);
-    revalidatePath('/admin/items'); 
-    revalidatePath('/'); 
-    return { 
-        message: `Item "${newItem.name}" created successfully! ${generatedImageUrl ? 'Image was auto-generated.' : ''}`, 
-        success: true,
-        generatedImageUrl: generatedImageUrl
+    revalidatePath('/admin/items');
+    revalidatePath('/');
+    return {
+      message: `Item "${newItem.name}" created successfully! ${generatedImageUrl ? 'Image was auto-generated.' : ''}`,
+      success: true,
+      generatedImageUrl: generatedImageUrl,
     };
   } catch (error) {
-    return { message: 'Failed to create item.', success: false, errors: { _form: ['Database error.']} };
+    return {
+      message: 'Failed to create item.',
+      success: false,
+      errors: { _form: ['Database error.'] },
+    };
   }
 }
 
@@ -118,7 +120,7 @@ export async function updateItemAction(
   prevState: ItemFormState | undefined,
   formData: FormData
 ): Promise<ItemFormState> {
-   const validatedFields = ItemFormInputSchema.safeParse({
+  const validatedFields = ItemFormInputSchema.safeParse({
     name: formData.get('name'),
     description: formData.get('description'),
     longDescription: formData.get('longDescription'),
@@ -134,7 +136,7 @@ export async function updateItemAction(
       success: false,
     };
   }
-  
+
   let imageUrl = validatedFields.data.imageUrl;
   let generatedImageUrl: string | undefined = undefined;
 
@@ -166,25 +168,31 @@ export async function updateItemAction(
     }
     revalidatePath('/admin/items');
     revalidatePath(`/admin/items/${id}/edit`);
-    revalidatePath(`/item/${id}`); 
-    revalidatePath('/'); 
-    return { 
-        message: `Item "${updatedItem.name}" updated successfully! ${generatedImageUrl ? 'Image was auto-generated.' : ''}`, 
-        success: true,
-        generatedImageUrl: generatedImageUrl
+    revalidatePath(`/item/${id}`);
+    revalidatePath('/');
+    return {
+      message: `Item "${updatedItem.name}" updated successfully! ${generatedImageUrl ? 'Image was auto-generated.' : ''}`,
+      success: true,
+      generatedImageUrl: generatedImageUrl,
     };
   } catch (error) {
-     return { message: 'Failed to update item.', success: false, errors: { _form: ['Database error.']} };
+    return {
+      message: 'Failed to update item.',
+      success: false,
+      errors: { _form: ['Database error.'] },
+    };
   }
 }
 
 // Delete Item Action
-export async function deleteItemAction(id: string): Promise<{ success: boolean; message?: string }> {
+export async function deleteItemAction(
+  id: string
+): Promise<{ success: boolean; message?: string }> {
   try {
     const success = await data.deleteItem(id);
     if (success) {
       revalidatePath('/admin/items');
-      revalidatePath('/'); 
+      revalidatePath('/');
       return { success: true, message: 'Item deleted successfully.' };
     }
     return { success: false, message: 'Failed to delete item or item not found.' };

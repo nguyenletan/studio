@@ -1,4 +1,3 @@
-
 import { PrismaClient } from '@prisma/client';
 
 declare global {
@@ -12,17 +11,20 @@ if (runtimeDbUrl && runtimeDbUrl.startsWith('prisma+postgres://')) {
   runtimeDbUrl = runtimeDbUrl.replace('prisma+postgres://', 'prisma://');
 }
 
-const dataSourceUrl = process.env.NODE_ENV === 'production' && runtimeDbUrl
-  ? runtimeDbUrl // Use normalized Accelerate URL
-  : process.env.DATABASE_URL; // Direct URL for dev or Vercel build migrations (DATABASE_URL)
+const dataSourceUrl =
+  process.env.NODE_ENV === 'production' && runtimeDbUrl
+    ? runtimeDbUrl // Use normalized Accelerate URL
+    : process.env.DATABASE_URL; // Direct URL for dev or Vercel build migrations (DATABASE_URL)
 
-const prisma = global.prisma || new PrismaClient({
-  datasources: {
-    db: {
-      url: dataSourceUrl,
+const prisma =
+  global.prisma ||
+  new PrismaClient({
+    datasources: {
+      db: {
+        url: dataSourceUrl,
+      },
     },
-  },
-});
+  });
 
 if (process.env.NODE_ENV === 'development') {
   global.prisma = prisma;

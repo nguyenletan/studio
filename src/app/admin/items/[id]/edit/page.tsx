@@ -13,7 +13,7 @@ export default async function EditItemPage({ params }: { params: { id: string } 
   if (!item) {
     return (
       <div className="space-y-6">
-        <h1 className="text-3xl font-headline font-bold">Item Not Found</h1>
+        <h1 className="font-headline text-3xl font-bold">Item Not Found</h1>
         <p className="text-muted-foreground">The item you are trying to edit does not exist.</p>
         <Button variant="outline" asChild>
           <Link href="/admin/items">
@@ -23,7 +23,7 @@ export default async function EditItemPage({ params }: { params: { id: string } 
       </div>
     );
   }
-  
+
   // Bind the item ID to the update action
   const updateItemActionWithId = updateItemAction.bind(null, params.id);
 
@@ -31,7 +31,7 @@ export default async function EditItemPage({ params }: { params: { id: string } 
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-headline font-bold">Edit Item: {item.name}</h1>
+          <h1 className="font-headline text-3xl font-bold">Edit Item: {item.name}</h1>
           <p className="text-muted-foreground">Modify the details of the game item.</p>
         </div>
         <Button variant="outline" asChild>
@@ -46,8 +46,8 @@ export default async function EditItemPage({ params }: { params: { id: string } 
           <CardDescription>Update the information for "{item.name}".</CardDescription>
         </CardHeader>
         <CardContent>
-          <ItemForm 
-            item={item} 
+          <ItemForm
+            item={item}
             formAction={updateItemActionWithId}
             deleteAction={deleteItemAction}
             isEditMode={true}

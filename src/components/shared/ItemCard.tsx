@@ -1,8 +1,14 @@
-
 import type { Item } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
@@ -12,9 +18,9 @@ interface ItemCardProps {
 
 export function ItemCard({ item }: ItemCardProps) {
   return (
-    <Card className="flex flex-col overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02] duration-300 ease-in-out">
+    <Card className="flex flex-col overflow-hidden transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg">
       <CardHeader className="p-0">
-        <div className="aspect-video relative w-full">
+        <div className="relative aspect-video w-full">
           <Image
             src={item.imageUrl}
             alt={item.name}
@@ -25,11 +31,13 @@ export function ItemCard({ item }: ItemCardProps) {
           />
         </div>
       </CardHeader>
-      <CardContent className="p-4 flex-grow">
-        <CardTitle className="text-xl font-headline mb-2">{item.name}</CardTitle>
-        <CardDescription className="text-sm text-muted-foreground line-clamp-3">{item.description}</CardDescription>
+      <CardContent className="flex-grow p-4">
+        <CardTitle className="font-headline mb-2 text-xl">{item.name}</CardTitle>
+        <CardDescription className="line-clamp-3 text-sm text-muted-foreground">
+          {item.description}
+        </CardDescription>
       </CardContent>
-      <CardFooter className="p-4 pt-0 flex justify-between items-center">
+      <CardFooter className="flex items-center justify-between p-4 pt-0">
         <p className="text-lg font-semibold text-primary">{item.price.toLocaleString()} Gold</p>
         <Button asChild variant="outline" size="sm">
           <Link href={`/item/${item.id}`}>

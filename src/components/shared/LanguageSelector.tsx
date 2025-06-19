@@ -10,8 +10,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Globe } from 'lucide-react';
-import {Locale} from '@/i18n/config'
-import {setUserLocale} from '@/i18n/cookies';
+import { Locale } from '@/i18n/config';
+import { setUserLocale } from '@/i18n/cookies';
 
 export function LanguageSelector() {
   const t = useTranslations();
@@ -20,7 +20,7 @@ export function LanguageSelector() {
 
   const handleLocaleChange = (newLocale: string) => {
     startTransition(() => {
-      setUserLocale(newLocale as Locale)
+      setUserLocale(newLocale as Locale);
     });
   };
 

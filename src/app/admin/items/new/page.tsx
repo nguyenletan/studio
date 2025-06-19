@@ -8,9 +8,9 @@ import { ArrowLeft } from 'lucide-react';
 export default function NewItemPage() {
   return (
     <div className="space-y-6">
-       <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-headline font-bold">Add New Item</h1>
+          <h1 className="font-headline text-3xl font-bold">Add New Item</h1>
           <p className="text-muted-foreground">Fill in the details for the new game item.</p>
         </div>
         <Button variant="outline" asChild>

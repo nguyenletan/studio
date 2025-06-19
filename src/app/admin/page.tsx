@@ -12,23 +12,30 @@ export default async function AdminDashboardPage() {
     <div className="space-y-8">
       <Card>
         <CardHeader>
-          <CardTitle className="text-3xl font-headline">Welcome, {session?.username || 'Admin'}!</CardTitle>
-          <CardDescription>Manage your game item listings and site settings from here.</CardDescription>
+          <CardTitle className="font-headline text-3xl">
+            Welcome, {session?.username || 'Admin'}!
+          </CardTitle>
+          <CardDescription>
+            Manage your game item listings and site settings from here.
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <p>This is your central hub for managing ItemDrop. Use the navigation oscuro to explore different sections.</p>
+          <p>
+            This is your central hub for managing ItemDrop. Use the navigation oscuro to explore
+            different sections.
+          </p>
         </CardContent>
       </Card>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="hover:shadow-lg transition-shadow">
+        <Card className="transition-shadow hover:shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Manage Items</CardTitle>
             <Package className="h-5 w-5 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">Item Listings</div>
-            <p className="text-xs text-muted-foreground mb-4">
+            <p className="mb-4 text-xs text-muted-foreground">
               View, edit, or delete existing items.
             </p>
             <Button asChild size="sm">
@@ -37,14 +44,14 @@ export default async function AdminDashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="hover:shadow-lg transition-shadow">
+        <Card className="transition-shadow hover:shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Add New Item</CardTitle>
             <PlusCircle className="h-5 w-5 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">Create Item</div>
-            <p className="text-xs text-muted-foreground mb-4">
+            <p className="mb-4 text-xs text-muted-foreground">
               Add a new game item to your catalog.
             </p>
             <Button asChild size="sm" variant="outline">
@@ -52,7 +59,7 @@ export default async function AdminDashboardPage() {
             </Button>
           </CardContent>
         </Card>
-        
+
         {/* Placeholder for future features */}
         {/* <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

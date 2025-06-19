@@ -7,11 +7,11 @@ export async function getItems(): Promise<Item[]> {
       createdAt: 'desc',
     },
   });
-  return itemsFromDb.map(item => ({
+  return itemsFromDb.map((item) => ({
     ...item,
     // Ensure price is a number if it's stored differently or for consistency,
     // though Prisma's Float should map to number directly.
-    price: Number(item.price), 
+    price: Number(item.price),
   }));
 }
 
@@ -28,7 +28,9 @@ export async function getItemById(id: string): Promise<Item | null> {
   };
 }
 
-export async function addItem(itemData: Omit<Item, 'id' | 'createdAt' | 'updatedAt'>): Promise<Item> {
+export async function addItem(
+  itemData: Omit<Item, 'id' | 'createdAt' | 'updatedAt'>
+): Promise<Item> {
   const newItem = await prisma.item.create({
     data: {
       ...itemData,
@@ -41,7 +43,10 @@ export async function addItem(itemData: Omit<Item, 'id' | 'createdAt' | 'updated
   };
 }
 
-export async function updateItem(id: string, itemData: Partial<Omit<Item, 'id' | 'createdAt' | 'updatedAt'>>): Promise<Item | null> {
+export async function updateItem(
+  id: string,
+  itemData: Partial<Omit<Item, 'id' | 'createdAt' | 'updatedAt'>>
+): Promise<Item | null> {
   try {
     const updatedItem = await prisma.item.update({
       where: { id },
@@ -70,10 +75,10 @@ export async function deleteItem(id: string): Promise<boolean> {
     });
     return true;
   } catch (error: any) {
-     // P2025 is "Record to delete does not exist."
+    // P2025 is "Record to delete does not exist."
     if (error.code === 'P2025') {
-      return false; 
+      return false;
     }
-    return false; 
+    return false;
   }
 }

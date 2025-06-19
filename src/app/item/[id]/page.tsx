@@ -1,4 +1,3 @@
-
 import { getItemById } from '@/lib/data';
 import type { Item } from '@/types';
 import { Header } from '@/components/shared/Header';
@@ -28,11 +27,11 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
 
   if (!item) {
     return (
-      <div className="flex flex-col min-h-screen">
+      <div className="flex min-h-screen flex-col">
         <Header />
-        <main className="flex-grow container py-8 flex flex-col items-center justify-center">
-          <h1 className="text-4xl font-bold mb-4">Item Not Found</h1>
-          <p className="text-muted-foreground mb-8">The item you are looking for does not exist.</p>
+        <main className="container flex flex-grow flex-col items-center justify-center py-8">
+          <h1 className="mb-4 text-4xl font-bold">Item Not Found</h1>
+          <p className="mb-8 text-muted-foreground">The item you are looking for does not exist.</p>
           <Button asChild>
             <Link href="/">
               <ArrowLeft className="mr-2 h-4 w-4" /> Back to Listings
@@ -46,17 +45,21 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
 
   const categoryIcon = (category: string) => {
     switch (category.toLowerCase()) {
-      case 'weapon': return <Gem className="h-5 w-5 text-primary" />;
-      case 'armor': return <Shield className="h-5 w-5 text-primary" />;
-      case 'potion': return <ScrollText className="h-5 w-5 text-primary" />; // Using ScrollText for potion
-      default: return <Tag className="h-5 w-5 text-primary" />;
+      case 'weapon':
+        return <Gem className="h-5 w-5 text-primary" />;
+      case 'armor':
+        return <Shield className="h-5 w-5 text-primary" />;
+      case 'potion':
+        return <ScrollText className="h-5 w-5 text-primary" />; // Using ScrollText for potion
+      default:
+        return <Tag className="h-5 w-5 text-primary" />;
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex-grow container py-8 max-w-7xl mx-auto">
+      <main className="container mx-auto max-w-7xl flex-grow py-8">
         <div className="mb-8">
           <Button asChild variant="outline">
             <Link href="/">
@@ -66,7 +69,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         </div>
 
         <Card className="overflow-hidden shadow-xl">
-          <div className="grid md:grid-cols-2 gap-0">
+          <div className="grid gap-0 md:grid-cols-2">
             <div className="relative aspect-square md:aspect-auto">
               <Image
                 src={item.imageUrl}
@@ -76,17 +79,23 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
                 data-ai-hint={item.category.toLowerCase()}
               />
             </div>
-            <div className="p-6 md:p-8 flex flex-col">
-              <CardHeader className="p-0 mb-4">
-                <CardTitle className="text-4xl font-headline font-bold text-primary">{item.name}</CardTitle>
+            <div className="flex flex-col p-6 md:p-8">
+              <CardHeader className="mb-4 p-0">
+                <CardTitle className="font-headline text-4xl font-bold text-primary">
+                  {item.name}
+                </CardTitle>
               </CardHeader>
-              <CardContent className="p-0 flex-grow">
-                <div className="flex items-center space-x-2 mb-4">
+              <CardContent className="flex-grow p-0">
+                <div className="mb-4 flex items-center space-x-2">
                   {categoryIcon(item.category)}
-                  <Badge variant="secondary" className="text-sm">{item.category}</Badge>
+                  <Badge variant="secondary" className="text-sm">
+                    {item.category}
+                  </Badge>
                 </div>
-                <p className="text-2xl font-semibold text-accent mb-6">{item.price.toLocaleString()} Gold</p>
-                <CardDescription className="text-base text-foreground mb-4">
+                <p className="mb-6 text-2xl font-semibold text-accent">
+                  {item.price.toLocaleString()} Gold
+                </p>
+                <CardDescription className="mb-4 text-base text-foreground">
                   {item.description}
                 </CardDescription>
                 {item.longDescription && (
@@ -96,7 +105,9 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
                 )}
               </CardContent>
               <div className="mt-8 p-0">
-                 <p className="text-sm text-muted-foreground">To purchase this item, please contact us directly.</p>
+                <p className="text-sm text-muted-foreground">
+                  To purchase this item, please contact us directly.
+                </p>
               </div>
             </div>
           </div>

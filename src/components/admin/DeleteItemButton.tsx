@@ -49,21 +49,28 @@ export function DeleteItemButton({ itemId, itemName }: DeleteItemButtonProps) {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="destructive" size="icon" title="Delete Item" disabled={isLoading}>
-          {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
+          {isLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Trash2 className="h-4 w-4" />
+          )}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the item
-            "{itemName}".
+            This action cannot be undone. This will permanently delete the item "{itemName}".
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete} disabled={isLoading} className="bg-destructive hover:bg-destructive/90">
-             {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+          <AlertDialogAction
+            onClick={handleDelete}
+            disabled={isLoading}
+            className="bg-destructive hover:bg-destructive/90"
+          >
+            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
             Confirm Delete
           </AlertDialogAction>
         </AlertDialogFooter>

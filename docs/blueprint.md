@@ -3,7 +3,7 @@
 ## Core Features:
 
 - Item Listing: Display a list of game items in a card format with images, names, and brief descriptions.
-- Item Detail View: Detailed page for each item, displaying all available information. 
+- Item Detail View: Detailed page for each item, displaying all available information.
 - Admin Panel: Administrative interface, protected by login, to manage and update item listings.
 
 ## Style Guidelines:

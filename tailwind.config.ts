@@ -9,11 +9,10 @@ export default {
   ],
   theme: {
     extend: {
-      // fontFamily: {
-      //   body: [ 'sans-serif'],
-      //   headline: [ 'sans-serif'],
-      //   code: ['monospace'],
-      // },
+      fontFamily: {
+        sans: ['"Space Grotesk"', 'sans-serif'],
+        // mono is still available if needed, but sans will be Space Grotesk
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

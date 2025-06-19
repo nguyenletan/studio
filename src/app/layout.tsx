@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { GeistMono } from 'geist/font/mono';
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: 'ItemDrop - Game Item Marketplace',
@@ -21,12 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/*<link rel="preconnect" href="https://fonts.googleapis.com" />*/}
-        {/*<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />*/}
-        {/*<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />*/}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </head>
       <body
-        className={`${GeistMono.className} font-body antialiased min-h-screen flex flex-col`}
+        className="font-sans antialiased min-h-screen flex flex-col bg-background text-foreground"
       >
         {children}
         <Toaster />

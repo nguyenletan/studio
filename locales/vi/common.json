@@ -1,0 +1,20 @@
+{
+  "site": {
+    "title": "ItemDrop - Chợ Vật Phẩm Game",
+    "description": "Liệt kê và tìm kiếm vật phẩm game để bán."
+  },
+  "header": {
+    "home": "Trang Chủ",
+    "admin": "Quản Trị",
+    "language": "Ngôn Ngữ"
+  },
+  "languageSelector": {
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt"
+  },
+  "home": {
+    "welcome": "Chào mừng đến với CS Skins!",
+    "browse": "Duyệt qua bộ sưu tập vật phẩm game huyền thoại của chúng tôi. Liên hệ với chúng tôi để mua.",
+    "noItems": "Hiện không có vật phẩm nào. Vui lòng quay lại sau!"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "site": {
+    "title": "ItemDrop - Game Item Marketplace",
+    "description": "List and find game items for sale."
+  },
+  "header": {
+    "home": "Home",
+    "admin": "Admin",
+    "language": "Language"
+  },
+  "languageSelector": {
+    "en": "English",
+    "vi": "Vietnamese"
+  },
+  "home": {
+    "welcome": "Welcome to CS Skins!",
+    "browse": "Browse our collection of legendary game items. Contact us to purchase.",
+    "noItems": "No items currently available. Check back soon!"
+  }
+}

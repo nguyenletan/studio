@@ -11,18 +11,18 @@ export async function login(username?: string, password?: string): Promise<{ suc
   }
   if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
     const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
-    cookies().set(SESSION_COOKIE_NAME, JSON.stringify({ username }), { expires, httpOnly: true, path: '/' });
+    (await cookies()).set(SESSION_COOKIE_NAME, JSON.stringify({ username }), { expires, httpOnly: true, path: '/' });
     return { success: true };
   }
   return { success: false, error: 'Invalid username or password.' };
 }
 
 export async function logout(): Promise<void> {
-  cookies().delete(SESSION_COOKIE_NAME);
+  (await cookies()).delete(SESSION_COOKIE_NAME);
 }
 
 export async function getSession(): Promise<AdminUser | null> {
-  const sessionCookie = cookies().get(SESSION_COOKIE_NAME);
+  const sessionCookie = (await cookies()).get(SESSION_COOKIE_NAME);
   if (!sessionCookie || !sessionCookie.value) {
     return null;
   }

@@ -1,4 +1,13 @@
 import type {NextConfig} from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin({
+  // // These are the locales that are supported in the application
+  // locales: ['en', 'vi'],
+  //
+  // // The default locale to use when visiting a non-localized route
+  // defaultLocale: 'en'
+});
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -20,4 +29,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

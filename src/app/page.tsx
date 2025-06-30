@@ -10,12 +10,10 @@ export default async function HomePage() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="container mx-auto max-w-7xl flex-grow  gap-4 py-8">
-        <h1 className="font-headline mb-8 text-center text-4xl font-bold text-primary">
-          Welcome to CS Skins!
-        </h1>
+      <main className="container mx-auto max-w-7xl flex-grow gap-4 py-8">
+        <h1 className="font-headline mb-8 text-center text-4xl font-bold text-primary">CS Skins</h1>
         <p className="mb-12 text-center text-lg text-muted-foreground">
-          Browse our collection of legendary game items. Contact us to purchase.
+          Danh sách các vật phẩm trong game CS Online
         </p>
         {items.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -24,9 +22,7 @@ export default async function HomePage() {
             ))}
           </div>
         ) : (
-          <p className="text-center text-xl text-muted-foreground">
-            No items currently available. Check back soon!
-          </p>
+          <p className="text-center text-xl text-muted-foreground">Ko có sản phẩm nào cả!</p>
         )}
       </main>
       <Footer />

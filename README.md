@@ -131,7 +131,6 @@ Follow these steps to deploy your application to Vercel:
 2.  **Import your project into Vercel.**
 3.  **Configure Environment Variables in Vercel**:
     Go to your project settings in Vercel and add the following environment variables:
-
     - `DATABASE_URL`: Your **direct PostgreSQL connection string**. This is used by `prisma migrate deploy` during the Vercel build. Example: `postgresql://USER:PASSWORD@HOST:PORT/DATABASE`.
     - `RUNTIME_DATABASE_URL`: Your **Prisma Accelerate connection string** (if you are using Accelerate). This is used by the application at runtime. Example: `prisma+postgres://accelerate.prisma-data.net/?api_key=YOUR_ACCELERATE_API_KEY`. If you are not using Accelerate, you can set this to the same value as `DATABASE_URL` or omit it if your application doesn't conditionally use it.
     - `ADMIN_USERNAME`: Your desired admin username.
@@ -147,7 +146,6 @@ Follow these steps to deploy your application to Vercel:
     ```
 
     Vercel will use this script to:
-
     - Install dependencies.
     - Generate the Prisma Client (`prisma generate`).
     - Apply any pending database migrations (`prisma migrate deploy`).
@@ -213,7 +211,6 @@ npm run format:check
 For the best development experience, install the ESLint and Prettier extensions for your code editor:
 
 - **VS Code**:
-
   - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
   - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 

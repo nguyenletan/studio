@@ -63,7 +63,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         <div className="mb-8">
           <Button asChild variant="outline">
             <Link href="/">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Listings
+              <ArrowLeft className="mr-2 h-4 w-4" /> Quay lại danh sách sản phẩm
             </Link>
           </Button>
         </div>
@@ -74,8 +74,8 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
               <Image
                 src={item.imageUrl}
                 alt={item.name}
-                layout="fill"
-                objectFit="contain"
+                fill
+                style={{ objectFit: 'contain' }}
                 data-ai-hint={item.category.toLowerCase()}
               />
             </div>
@@ -106,7 +106,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
               </CardContent>
               <div className="mt-8 p-0">
                 <p className="text-sm text-muted-foreground">
-                  To purchase this item, please contact us directly.
+                  Để mua vật phẩm, xin vui lòng liên hệ với chúng tôi {process.env.NEXT_TEL_NUM}
                 </p>
               </div>
             </div>

@@ -38,10 +38,10 @@ export function ItemCard({ item }: ItemCardProps) {
         </CardDescription>
       </CardContent>
       <CardFooter className="flex items-center justify-between p-4 pt-0">
-        <p className="text-lg font-semibold text-primary">{item.price.toLocaleString()} Gold</p>
+        <p className="text-lg font-semibold text-primary">{item.price.toLocaleString()} VND</p>
         <Button asChild variant="outline" size="sm">
           <Link href={`/item/${item.id}`}>
-            View Details
+            Xem chi tiết
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>

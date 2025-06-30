@@ -11,7 +11,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { PlusCircle, Edit3, Trash2, PackageSearch } from 'lucide-react';
+import { PlusCircle, Edit3, PackageSearch } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { DeleteItemButton } from '@/components/admin/DeleteItemButton'; // New component

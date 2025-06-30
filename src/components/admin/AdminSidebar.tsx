@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
 import { adminLogout } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -10,8 +10,6 @@ import {
   Package,
   PlusCircle,
   LogOut,
-  Settings,
-  Users,
   Gamepad2,
 } from 'lucide-react';
 import {
@@ -22,23 +20,28 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-} from '@/components/ui/sidebar'; // Assuming sidebar is a ShadCN component or custom
+} from '@/components/ui/sidebar';
+import { LanguageSelector } from '@/components/shared/LanguageSelector'; // Assuming sidebar is a ShadCN component or custom
 
 const navItems = [
-  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/items', label: 'Manage Items', icon: Package },
-  // { href: '/admin/users', label: 'Manage Users', icon: Users },
-  // { href: '/admin/settings', label: 'Settings', icon: Settings },
+  { href: '/admin', label: 'dashboard', icon: LayoutDashboard },
+  { href: '/admin/items', label: 'manageItems', icon: Package },
+  // { href: '/admin/users', label: 'manageUsers', icon: Users },
+  // { href: '/admin/settings', label: 'settings', icon: Settings },
 ];
 
 export function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const { toast } = useToast();
+  const t = useTranslations();
 
   const handleLogout = async () => {
     await adminLogout();
-    toast({ title: 'Logged Out', description: 'You have been successfully logged out.' });
+    toast({
+      title: t('adminSidebar.logoutTitle'),
+      description: t('adminSidebar.logoutDescription'),
+    });
     router.push('/admin/login');
     router.refresh();
   };
@@ -52,8 +55,9 @@ export function AdminSidebar() {
         >
           <Gamepad2 className="h-8 w-8 text-primary" />
           <span className="font-headline text-xl font-bold group-data-[collapsible=icon]:hidden">
-            ItemDrop Admin
+            {t('adminSidebar.title')}
           </span>
+          <LanguageSelector />
         </Link>
       </SidebarHeader>
 
@@ -67,11 +71,11 @@ export function AdminSidebar() {
                   pathname === item.href ||
                   (item.href !== '/admin' && pathname.startsWith(item.href))
                 }
-                tooltip={{ children: item.label, side: 'right' }}
+                tooltip={{ children: t(`adminSidebar.${item.label}`), side: 'right' }}
               >
                 <Link href={item.href}>
                   <item.icon />
-                  <span>{item.label}</span>
+                  <span>{t(`adminSidebar.${item.label}`)}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -80,11 +84,11 @@ export function AdminSidebar() {
             <SidebarMenuButton
               asChild
               isActive={pathname === '/admin/items/new'}
-              tooltip={{ children: 'Add New Item', side: 'right' }}
+              tooltip={{ children: t('adminSidebar.addNewItem'), side: 'right' }}
             >
               <Link href="/admin/items/new">
                 <PlusCircle />
-                <span>Add New Item</span>
+                <span>{t('adminSidebar.addNewItem')}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -96,10 +100,10 @@ export function AdminSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton
               onClick={handleLogout}
-              tooltip={{ children: 'Logout', side: 'right' }}
+              tooltip={{ children: t('adminSidebar.logout'), side: 'right' }}
             >
               <LogOut />
-              <span>Logout</span>
+              <span>{t('adminSidebar.logout')}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

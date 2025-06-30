@@ -15,39 +15,43 @@ import { PlusCircle, Edit3, PackageSearch } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { DeleteItemButton } from '@/components/admin/DeleteItemButton'; // New component
+import { getTranslations } from 'next-intl/server';
 
 export default async function AdminItemsPage() {
   const items: Item[] = await getItems();
+  const t = await getTranslations();
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-headline text-3xl font-bold">Manage Items</h1>
-          <p className="text-muted-foreground">View, edit, or add new game items.</p>
+          <h1 className="font-headline text-3xl font-bold">{t('adminItems.pageTitle')}</h1>
+          <p className="text-muted-foreground">{t('adminItems.pageDescription')}</p>
         </div>
         <Button asChild>
           <Link href="/admin/items/new">
-            <PlusCircle className="mr-2 h-4 w-4" /> Add New Item
+            <PlusCircle className="mr-2 h-4 w-4" /> {t('adminItems.addNewItem')}
           </Link>
         </Button>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Item Listings</CardTitle>
-          <CardDescription>A list of all items currently in the system.</CardDescription>
+          <CardTitle>{t('adminItems.itemListingsTitle')}</CardTitle>
+          <CardDescription>{t('adminItems.itemListingsDescription')}</CardDescription>
         </CardHeader>
         <CardContent>
           {items.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[80px]">Image</TableHead>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead className="text-right">Price</TableHead>
-                  <TableHead className="w-[150px] text-center">Actions</TableHead>
+                  <TableHead className="w-[80px]">{t('adminItems.tableImage')}</TableHead>
+                  <TableHead>{t('adminItems.tableName')}</TableHead>
+                  <TableHead>{t('adminItems.tableCategory')}</TableHead>
+                  <TableHead className="text-right">{t('adminItems.tablePrice')}</TableHead>
+                  <TableHead className="w-[150px] text-center">
+                    {t('adminItems.tableActions')}
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -67,9 +71,15 @@ export default async function AdminItemsPage() {
                     <TableCell>
                       <Badge variant="outline">{item.category}</Badge>
                     </TableCell>
-                    <TableCell className="text-right">{item.price.toLocaleString()} Gold</TableCell>
+                    {/*<TableCell className="text-right">{item.price.toLocaleString()} {t('adminItems.currency')}</TableCell>*/}
+                    <TableCell className="text-right">{item.price.toLocaleString()} VND</TableCell>
                     <TableCell className="space-x-2 text-center">
-                      <Button variant="outline" size="icon" asChild title="Edit Item">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        asChild
+                        title={t('adminItems.editItemTooltip')}
+                      >
                         <Link href={`/admin/items/${item.id}/edit`}>
                           <Edit3 className="h-4 w-4" />
                         </Link>
@@ -83,11 +93,13 @@ export default async function AdminItemsPage() {
           ) : (
             <div className="py-12 text-center">
               <PackageSearch className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-              <p className="text-xl font-semibold text-muted-foreground">No items found.</p>
-              <p className="text-sm text-muted-foreground">Get started by adding a new item.</p>
+              <p className="text-xl font-semibold text-muted-foreground">
+                {t('adminItems.noItemsFound')}
+              </p>
+              <p className="text-sm text-muted-foreground">{t('adminItems.noItemsDescription')}</p>
               <Button asChild className="mt-4">
                 <Link href="/admin/items/new">
-                  <PlusCircle className="mr-2 h-4 w-4" /> Add New Item
+                  <PlusCircle className="mr-2 h-4 w-4" /> {t('adminItems.addNewItem')}
                 </Link>
               </Button>
             </div>

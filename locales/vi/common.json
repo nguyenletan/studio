@@ -1,6 +1,6 @@
 {
   "site": {
-    "title": "ItemDrop - Chợ Vật Phẩm Game",
+    "title": "CS Skins - Chợ Vật Phẩm Game",
     "description": "Liệt kê và tìm kiếm vật phẩm game để bán."
   },
   "header": {
@@ -16,5 +16,168 @@
     "welcome": "Chào mừng đến với CS Skins!",
     "browse": "Duyệt qua bộ sưu tập vật phẩm game huyền thoại của chúng tôi. Liên hệ với chúng tôi để mua.",
     "noItems": "Hiện không có vật phẩm nào. Vui lòng quay lại sau!"
+  },
+  "adminSidebar": {
+    "title": "Quản Trị ItemDrop",
+    "dashboard": "Bảng Điều Khiển",
+    "manageItems": "Quản Lý Vật Phẩm",
+    "manageUsers": "Quản Lý Người Dùng",
+    "settings": "Cài Đặt",
+    "addNewItem": "Thêm Vật Phẩm Mới",
+    "logout": "Đăng Xuất",
+    "logoutTitle": "Đã Đăng Xuất",
+    "logoutDescription": "Bạn đã đăng xuất thành công."
+  },
+  "adminDashboard": {
+    "welcomePrefix": "Xin chào,",
+    "welcomeSuffix": "!",
+    "defaultAdmin": "Quản trị viên",
+    "manageDescription": "Quản lý danh sách vật phẩm game và cài đặt trang web từ đây.",
+    "centralHub": "Đây là trung tâm quản lý ItemDrop của bạn. Sử dụng thanh điều hướng để khám phá các phần khác nhau.",
+    "manageItemsTitle": "Quản Lý Vật Phẩm",
+    "itemListingsTitle": "Danh Sách Vật Phẩm",
+    "itemListingsDescription": "Xem, chỉnh sửa hoặc xóa các vật phẩm hiện có.",
+    "goToItems": "Đến Vật Phẩm",
+    "addNewItemTitle": "Thêm Vật Phẩm Mới",
+    "createItemTitle": "Tạo Vật Phẩm",
+    "addItemDescription": "Thêm vật phẩm game mới vào danh mục của bạn.",
+    "addItem": "Thêm Vật Phẩm",
+    "userManagementTitle": "Quản Lý Người Dùng",
+    "comingSoonTitle": "Sắp Ra Mắt",
+    "userManagementDescription": "Quản lý tài khoản và vai trò người dùng.",
+    "viewUsers": "Xem Người Dùng"
+  },
+  "adminEditItem": {
+    "itemNotFound": "Không Tìm Thấy Vật Phẩm",
+    "itemNotFoundDescription": "Vật phẩm bạn đang cố gắng chỉnh sửa không tồn tại.",
+    "backToItems": "Quay Lại Danh Sách",
+    "editItemTitle": "Chỉnh Sửa Vật Phẩm: {name}",
+    "editItemDescription": "Chỉnh sửa thông tin chi tiết của vật phẩm game.",
+    "editItemDetailsTitle": "Chỉnh Sửa Chi Tiết Vật Phẩm",
+    "editItemDetailsDescription": "Cập nhật thông tin cho \"{name}\"."
+  },
+  "adminItems": {
+    "pageTitle": "Quản Lý Vật Phẩm",
+    "pageDescription": "Xem, chỉnh sửa, hoặc thêm vật phẩm game mới.",
+    "addNewItem": "Thêm Vật Phẩm Mới",
+    "itemListingsTitle": "Danh Sách Vật Phẩm",
+    "itemListingsDescription": "Danh sách tất cả các vật phẩm hiện có trong hệ thống.",
+    "tableImage": "Hình Ảnh",
+    "tableName": "Tên",
+    "tableCategory": "Danh Mục",
+    "tablePrice": "Giá",
+    "tableActions": "Thao Tác",
+    "currency": "Vàng",
+    "editItemTooltip": "Chỉnh Sửa Vật Phẩm",
+    "noItemsFound": "Không tìm thấy vật phẩm nào.",
+    "noItemsDescription": "Bắt đầu bằng cách thêm một vật phẩm mới.",
+    "deleteButton": {
+      "tooltip": "Xóa Vật Phẩm",
+      "itemDeleted": "Đã Xóa Vật Phẩm",
+      "deletionFailed": "Xóa Thất Bại",
+      "errorOccurred": "Đã xảy ra lỗi.",
+      "deleteSuccess": "\"{name}\" đã được xóa thành công.",
+      "confirmTitle": "Bạn có chắc chắn không?",
+      "confirmDescription": "Hành động này không thể hoàn tác. Việc này sẽ xóa vĩnh viễn vật phẩm \"{name}\".",
+      "cancel": "Hủy",
+      "confirmDelete": "Xác Nhận Xóa"
+    }
+  },
+  "adminItemForm": {
+    "labels": {
+      "name": "Tên Vật Phẩm",
+      "shortDescription": "Mô Tả Ngắn",
+      "longDescription": "Mô Tả Chi Tiết (Tùy Chọn)",
+      "price": "Giá (VND)",
+      "category": "Danh Mục",
+      "imageUrl": "URL Hình Ảnh (Tùy Chọn - sẽ được tự động tạo nếu để trống hoặc dùng ảnh mẫu)"
+    },
+    "placeholders": {
+      "name": "Excalibur",
+      "shortDescription": "Một thanh kiếm huyền thoại với sức mạnh vô song.",
+      "longDescription": "Thông tin chi tiết và thuộc tính của vật phẩm...",
+      "price": "10000",
+      "category": "Vũ Khí, Áo Giáp, Thuốc",
+      "imageUrl": "Để trống hoặc nhập https://placehold.co/600x400.png để tự động tạo"
+    },
+    "validation": {
+      "nameLength": "Tên phải có ít nhất 3 ký tự.",
+      "descriptionLength": "Mô tả phải có ít nhất 10 ký tự.",
+      "positivePrice": "Giá phải là số dương.",
+      "validUrl": "Vui lòng nhập URL hợp lệ.",
+      "requiredCategory": "Danh mục là bắt buộc.",
+      "formErrors": "Vui lòng sửa các lỗi trong biểu mẫu."
+    },
+    "buttons": {
+      "saving": "Đang Lưu...",
+      "creating": "Đang Tạo...",
+      "saveChanges": "Lưu Thay Đổi",
+      "createItem": "Tạo Vật Phẩm",
+      "deleting": "Đang Xóa...",
+      "deleteItem": "Xóa Vật Phẩm",
+      "cancel": "Hủy",
+      "confirmDelete": "Xác Nhận Xóa"
+    },
+    "messages": {
+      "updateSuccess": "Cập Nhật Thành Công",
+      "createSuccess": "Tạo Thành Công",
+      "updateFailed": "Cập Nhật Thất Bại",
+      "createFailed": "Tạo Thất Bại",
+      "errorOccurred": "Đã xảy ra lỗi.",
+      "validationError": "Lỗi Xác Thực",
+      "itemDeleted": "Đã Xóa Vật Phẩm",
+      "deletionFailed": "Xóa Thất Bại",
+      "imageAutoGenerate": "Hình ảnh sẽ được tự động tạo khi lưu nếu trường này trống hoặc sử dụng ảnh mẫu."
+    },
+    "deleteConfirmation": {
+      "title": "Bạn có chắc không?",
+      "description": "Hành động này không thể hoàn tác. Việc này sẽ xóa vĩnh viễn vật phẩm \"{name}\"."
+    }
+  },
+  "adminLogin": {
+    "title": "Đăng Nhập Quản Trị",
+    "description": "Nhập thông tin đăng nhập để truy cập bảng điều khiển quản trị.",
+    "labels": {
+      "username": "Tên Đăng Nhập",
+      "password": "Mật Khẩu"
+    },
+    "placeholders": {
+      "username": "admin",
+      "password": "••••••••"
+    },
+    "validation": {
+      "usernameRequired": "Tên đăng nhập là bắt buộc.",
+      "passwordRequired": "Mật khẩu là bắt buộc."
+    },
+    "buttons": {
+      "login": "Đăng Nhập",
+      "loggingIn": "Đang Đăng Nhập..."
+    },
+    "messages": {
+      "loginSuccess": "Đăng Nhập Thành Công",
+      "redirecting": "Đang chuyển hướng đến bảng điều khiển quản trị...",
+      "loginFailed": "Đăng Nhập Thất Bại",
+      "unknownError": "Đã xảy ra lỗi không xác định.",
+      "loginError": "Lỗi Đăng Nhập",
+      "unexpectedError": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại."
+    }
+  },
+  "adminNewItem": {
+    "pageTitle": "Thêm Vật Phẩm Mới",
+    "pageDescription": "Điền thông tin chi tiết cho vật phẩm game mới.",
+    "backToItems": "Quay Lại Danh Sách",
+    "detailsTitle": "Chi Tiết Vật Phẩm Mới",
+    "detailsDescription": "Cung cấp tất cả thông tin cần thiết cho vật phẩm."
+  },
+  "itemCard": {
+    "viewDetails": "Xem Chi Tiết",
+    "currency": "VND"
+  },
+  "itemDetail": {
+    "notFound": "Không Tìm Thấy Vật Phẩm",
+    "notFoundDescription": "Vật phẩm bạn đang tìm kiếm không tồn tại.",
+    "backToListings": "Quay Lại Danh Sách",
+    "currency": "Vàng",
+    "contactInfo": "Để mua vật phẩm này, vui lòng liên hệ trực tiếp với chúng tôi."
   }
 }

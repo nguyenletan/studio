@@ -20,6 +20,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { Save, Trash2, Loader2, Images } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { ItemFormState } from '@/lib/actions';
 import {
   AlertDialog,
@@ -33,13 +34,15 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 
+// We need to define the schema outside the component to avoid re-creation on each render
+// but we'll use the translation function inside the component for error messages
 const itemFormSchema = z.object({
-  name: z.string().min(3, { message: 'Name must be at least 3 characters long.' }),
-  description: z.string().min(10, { message: 'Description must be at least 10 characters long.' }),
+  name: z.string().min(3, { message: 'nameLength' }),
+  description: z.string().min(10, { message: 'descriptionLength' }),
   longDescription: z.string().optional(),
-  price: z.coerce.number().min(0, { message: 'Price must be a positive number.' }),
-  imageUrl: z.string().url({ message: 'Please enter a valid URL.' }).optional().or(z.literal('')),
-  category: z.string().min(1, { message: 'Category is required.' }),
+  price: z.coerce.number().min(0, { message: 'positivePrice' }),
+  imageUrl: z.string().url({ message: 'validUrl' }).optional().or(z.literal('')),
+  category: z.string().min(1, { message: 'requiredCategory' }),
 });
 
 export type ItemFormValues = z.infer<typeof itemFormSchema>;
@@ -59,6 +62,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | undefined>(item?.imageUrl);
+  const t = useTranslations('adminItemForm');
 
   const form = useForm<ItemFormValues>({
     resolver: zodResolver(itemFormSchema),
@@ -85,7 +89,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
     if (formState?.message) {
       if (formState.success) {
         toast({
-          title: isEditMode ? 'Update Successful' : 'Creation Successful',
+          title: isEditMode ? t('messages.updateSuccess') : t('messages.createSuccess'),
           description: formState.message,
         });
         if (formState.generatedImageUrl) {
@@ -106,8 +110,8 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
       } else {
         toast({
           variant: 'destructive',
-          title: isEditMode ? 'Update Failed' : 'Creation Failed',
-          description: formState.message || 'An error occurred.',
+          title: isEditMode ? t('messages.updateFailed') : t('messages.createFailed'),
+          description: formState.message || t('messages.errorOccurred'),
         });
       }
     }
@@ -115,7 +119,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
       // Set form errors manually if needed, or rely on zodResolver
     }
     setIsSubmitting(false);
-  }, [formState, toast, form, router, isEditMode, item]);
+  }, [formState, toast, form, router, isEditMode, item, t]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -128,8 +132,8 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
       setIsSubmitting(false);
       toast({
         variant: 'destructive',
-        title: 'Validation Error',
-        description: 'Please correct the errors in the form.',
+        title: t('messages.validationError'),
+        description: t('validation.formErrors'),
       });
     }
   };
@@ -139,10 +143,14 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
     setIsDeleting(true);
     const result = await deleteAction(item.id);
     if (result.success) {
-      toast({ title: 'Item Deleted', description: result.message });
+      toast({ title: t('messages.itemDeleted'), description: result.message });
       router.push('/admin/items');
     } else {
-      toast({ variant: 'destructive', title: 'Deletion Failed', description: result.message });
+      toast({
+        variant: 'destructive',
+        title: t('messages.deletionFailed'),
+        description: result.message,
+      });
     }
     setIsDeleting(false);
   };
@@ -164,11 +172,11 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Item Name</FormLabel>
+              <FormLabel>{t('labels.name')}</FormLabel>
               <FormControl>
-                <Input placeholder="Excalibur" {...field} />
+                <Input placeholder={t('placeholders.name')} {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage>{field.error && t(`validation.${field.error.message}`)}</FormMessage>
             </FormItem>
           )}
         />
@@ -177,11 +185,11 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Short Description</FormLabel>
+              <FormLabel>{t('labels.shortDescription')}</FormLabel>
               <FormControl>
-                <Textarea placeholder="A legendary sword of immense power." {...field} rows={3} />
+                <Textarea placeholder={t('placeholders.shortDescription')} {...field} rows={3} />
               </FormControl>
-              <FormMessage />
+              <FormMessage>{field.error && t(`validation.${field.error.message}`)}</FormMessage>
             </FormItem>
           )}
         />
@@ -190,15 +198,11 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
           name="longDescription"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Long Description (Optional)</FormLabel>
+              <FormLabel>{t('labels.longDescription')}</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="Detailed lore and attributes of the item..."
-                  {...field}
-                  rows={6}
-                />
+                <Textarea placeholder={t('placeholders.longDescription')} {...field} rows={6} />
               </FormControl>
-              <FormMessage />
+              <FormMessage>{field.error && t(`validation.${field.error.message}`)}</FormMessage>
             </FormItem>
           )}
         />
@@ -208,11 +212,11 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Price (Gold)</FormLabel>
+                <FormLabel>{t('labels.price')}</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="10000" {...field} />
+                  <Input type="number" placeholder={t('placeholders.price')} {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage>{field.error && t(`validation.${field.error.message}`)}</FormMessage>
               </FormItem>
             )}
           />
@@ -221,11 +225,11 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
             name="category"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Category</FormLabel>
+                <FormLabel>{t('labels.category')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Weapon, Armor, Potion" {...field} />
+                  <Input placeholder={t('placeholders.category')} {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage>{field.error && t(`validation.${field.error.message}`)}</FormMessage>
               </FormItem>
             )}
           />
@@ -235,12 +239,10 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
           name="imageUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                Image URL (Optional - will be auto-generated if left empty or placeholder)
-              </FormLabel>
+              <FormLabel>{t('labels.imageUrl')}</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Leave empty or https://placehold.co/600x400.png to auto-generate"
+                  placeholder={t('placeholders.imageUrl')}
                   {...field}
                   onChange={(e) => {
                     field.onChange(e);
@@ -248,7 +250,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
                   }}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage>{field.error && t(`validation.${field.error.message}`)}</FormMessage>
               {previewUrl && (
                 <div className="mt-2">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -262,10 +264,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
               {!previewUrl && !field.value && (
                 <div className="mt-2 rounded-md border border-dashed p-4 text-center text-muted-foreground">
                   <Images className="mx-auto mb-2 h-10 w-10" />
-                  <p>
-                    An image will be auto-generated upon saving if this field is empty or a
-                    placeholder.
-                  </p>
+                  <p>{t('messages.imageAutoGenerate')}</p>
                 </div>
               )}
             </FormItem>
@@ -287,11 +286,11 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
             )}
             {isSubmitting
               ? isEditMode
-                ? 'Saving...'
-                : 'Creating...'
+                ? t('buttons.saving')
+                : t('buttons.creating')
               : isEditMode
-                ? 'Save Changes'
-                : 'Create Item'}
+                ? t('buttons.saveChanges')
+                : t('buttons.createItem')}
           </Button>
           {isEditMode && deleteAction && item && (
             <AlertDialog>
@@ -302,26 +301,25 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
                   ) : (
                     <Trash2 className="mr-2 h-4 w-4" />
                   )}
-                  {isDeleting ? 'Deleting...' : 'Delete Item'}
+                  {isDeleting ? t('buttons.deleting') : t('buttons.deleteItem')}
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                  <AlertDialogTitle>{t('deleteConfirmation.title')}</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete the item "{item.name}
-                    ".
+                    {t('deleteConfirmation.description', { name: item.name })}
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+                  <AlertDialogCancel disabled={isDeleting}>{t('buttons.cancel')}</AlertDialogCancel>
                   <AlertDialogAction
                     onClick={handleDelete}
                     disabled={isDeleting}
                     className="bg-destructive hover:bg-destructive/90"
                   >
                     {isDeleting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                    Confirm Delete
+                    {t('buttons.confirmDelete')}
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>

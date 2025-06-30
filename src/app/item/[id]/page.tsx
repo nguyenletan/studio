@@ -8,33 +8,36 @@ import Link from 'next/link';
 import { ArrowLeft, Tag, Shield, Gem, ScrollText } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const item = await getItemById(params.id);
+  const t = await getTranslations();
   if (!item) {
     return {
-      title: 'Item Not Found',
+      title: t('itemDetail.notFound'),
     };
   }
   return {
-    title: `${item.name} - ItemDrop`,
+    title: `${item.name} - CS Skins`,
     description: item.description,
   };
 }
 
 export default async function ItemDetailPage({ params }: { params: { id: string } }) {
   const item: Item | null = await getItemById(params.id);
+  const t = await getTranslations();
 
   if (!item) {
     return (
       <div className="flex min-h-screen flex-col">
         <Header />
         <main className="container flex flex-grow flex-col items-center justify-center py-8">
-          <h1 className="mb-4 text-4xl font-bold">Item Not Found</h1>
-          <p className="mb-8 text-muted-foreground">The item you are looking for does not exist.</p>
+          <h1 className="mb-4 text-4xl font-bold">{t('itemDetail.notFound')}</h1>
+          <p className="mb-8 text-muted-foreground">{t('itemDetail.notFoundDescription')}</p>
           <Button asChild>
             <Link href="/">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Listings
+              <ArrowLeft className="mr-2 h-4 w-4" /> {t('itemDetail.backToListings')}
             </Link>
           </Button>
         </main>
@@ -63,7 +66,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         <div className="mb-8">
           <Button asChild variant="outline">
             <Link href="/">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Quay lại danh sách sản phẩm
+              <ArrowLeft className="mr-2 h-4 w-4" /> {t('itemDetail.backToListings')}
             </Link>
           </Button>
         </div>
@@ -93,7 +96,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
                   </Badge>
                 </div>
                 <p className="mb-6 text-2xl font-semibold text-accent">
-                  {item.price.toLocaleString()} Gold
+                  {item.price.toLocaleString()} {t('itemDetail.currency')}
                 </p>
                 <CardDescription className="mb-4 text-base text-foreground">
                   {item.description}
@@ -105,9 +108,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
                 )}
               </CardContent>
               <div className="mt-8 p-0">
-                <p className="text-sm text-muted-foreground">
-                  Để mua vật phẩm, xin vui lòng liên hệ với chúng tôi {process.env.NEXT_TEL_NUM}
-                </p>
+                <p className="text-sm text-muted-foreground">{t('itemDetail.contactInfo')}</p>
               </div>
             </div>
           </div>

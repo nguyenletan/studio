@@ -6,18 +6,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 export default async function EditItemPage({ params }: { params: { id: string } }) {
   const item: Item | null | undefined = await getItemById(params.id);
+  const t = await getTranslations();
 
   if (!item) {
     return (
       <div className="space-y-6">
-        <h1 className="font-headline text-3xl font-bold">Item Not Found</h1>
-        <p className="text-muted-foreground">The item you are trying to edit does not exist.</p>
+        <h1 className="font-headline text-3xl font-bold">{t('adminEditItem.itemNotFound')}</h1>
+        <p className="text-muted-foreground">{t('adminEditItem.itemNotFoundDescription')}</p>
         <Button variant="outline" asChild>
           <Link href="/admin/items">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Items
+            <ArrowLeft className="mr-2 h-4 w-4" /> {t('adminEditItem.backToItems')}
           </Link>
         </Button>
       </div>
@@ -31,19 +33,23 @@ export default async function EditItemPage({ params }: { params: { id: string } 
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-headline text-3xl font-bold">Edit Item: {item?.name}</h1>
-          <p className="text-muted-foreground">Modify the details of the game item.</p>
+          <h1 className="font-headline text-3xl font-bold">
+            {t('adminEditItem.editItemTitle', { name: item?.name })}
+          </h1>
+          <p className="text-muted-foreground">{t('adminEditItem.editItemDescription')}</p>
         </div>
         <Button variant="outline" asChild>
           <Link href="/admin/items">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Items
+            <ArrowLeft className="mr-2 h-4 w-4" /> {t('adminEditItem.backToItems')}
           </Link>
         </Button>
       </div>
       <Card>
         <CardHeader>
-          <CardTitle>Edit Item Details</CardTitle>
-          <CardDescription>Update the information for "{item?.name}".</CardDescription>
+          <CardTitle>{t('adminEditItem.editItemDetailsTitle')}</CardTitle>
+          <CardDescription>
+            {t('adminEditItem.editItemDetailsDescription', { name: item?.name })}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <ItemForm

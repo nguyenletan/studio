@@ -4,25 +4,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
-export default function NewItemPage() {
+export default async function NewItemPage() {
+  const t = await getTranslations();
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-headline text-3xl font-bold">Add New Item</h1>
-          <p className="text-muted-foreground">Fill in the details for the new game item.</p>
+          <h1 className="font-headline text-3xl font-bold">{t('adminNewItem.pageTitle')}</h1>
+          <p className="text-muted-foreground">{t('adminNewItem.pageDescription')}</p>
         </div>
         <Button variant="outline" asChild>
           <Link href="/admin/items">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Items
+            <ArrowLeft className="mr-2 h-4 w-4" /> {t('adminNewItem.backToItems')}
           </Link>
         </Button>
       </div>
       <Card>
         <CardHeader>
-          <CardTitle>New Item Details</CardTitle>
-          <CardDescription>Provide all necessary information for the item.</CardDescription>
+          <CardTitle>{t('adminNewItem.detailsTitle')}</CardTitle>
+          <CardDescription>{t('adminNewItem.detailsDescription')}</CardDescription>
         </CardHeader>
         <CardContent>
           <ItemForm formAction={createItemAction} isEditMode={false} />

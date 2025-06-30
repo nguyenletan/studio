@@ -19,10 +19,13 @@ import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { LogIn } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
+// We need to define the schema outside the component to avoid re-creation on each render
+// but we'll use the translation function inside the component for error messages
 const loginFormSchema = z.object({
-  username: z.string().min(1, { message: 'Username is required.' }),
-  password: z.string().min(1, { message: 'Password is required.' }),
+  username: z.string().min(1, { message: 'usernameRequired' }),
+  password: z.string().min(1, { message: 'passwordRequired' }),
 });
 
 type LoginFormValues = z.infer<typeof loginFormSchema>;
@@ -31,6 +34,7 @@ export function LoginForm() {
   const { toast } = useToast();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslations('adminLogin');
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
@@ -46,23 +50,23 @@ export function LoginForm() {
       const result = await adminLogin(data.username, data.password);
       if (result.success) {
         toast({
-          title: 'Login Successful',
-          description: 'Redirecting to admin dashboard...',
+          title: t('messages.loginSuccess'),
+          description: t('messages.redirecting'),
         });
         router.push('/admin');
         router.refresh(); // Ensure layout re-renders and auth state is fresh
       } else {
         toast({
           variant: 'destructive',
-          title: 'Login Failed',
-          description: result.error || 'An unknown error occurred.',
+          title: t('messages.loginFailed'),
+          description: result.error || t('messages.unknownError'),
         });
       }
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: 'Login Error',
-        description: 'An unexpected error occurred. Please try again.',
+        title: t('messages.loginError'),
+        description: t('messages.unexpectedError'),
       });
     } finally {
       setIsLoading(false);
@@ -73,11 +77,9 @@ export function LoginForm() {
     <Card className="w-full max-w-md shadow-2xl">
       <CardHeader>
         <CardTitle className="font-headline text-center text-3xl text-primary">
-          Admin Login
+          {t('title')}
         </CardTitle>
-        <CardDescription className="text-center">
-          Enter your credentials to access the admin panel.
-        </CardDescription>
+        <CardDescription className="text-center">{t('description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -87,11 +89,11 @@ export function LoginForm() {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>{t('labels.username')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="admin" {...field} />
+                    <Input placeholder={t('placeholders.username')} {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage>{field.error && t(`validation.${field.error.message}`)}</FormMessage>
                 </FormItem>
               )}
             />
@@ -100,20 +102,20 @@ export function LoginForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>{t('labels.password')}</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <Input type="password" placeholder={t('placeholders.password')} {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage>{field.error && t(`validation.${field.error.message}`)}</FormMessage>
                 </FormItem>
               )}
             />
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? (
-                'Logging in...'
+                t('buttons.loggingIn')
               ) : (
                 <>
-                  <LogIn className="mr-2 h-4 w-4" /> Login
+                  <LogIn className="mr-2 h-4 w-4" /> {t('buttons.login')}
                 </>
               )}
             </Button>

@@ -3,23 +3,27 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { NextIntlClientProvider } from 'next-intl';
-import { getLocale } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import React from 'react';
 
-export const metadata: Metadata = {
-  title: 'CS Skins - Game Item Marketplace',
-  description: 'List and find game items for sale.',
-  icons: { icon: 'data:,' }, // prevent default favicon lookup
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: t('site.title'),
+    description: t('site.description'),
+    icons: { icon: 'data:,' }, // prevent default favicon lookup
+  };
+}
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const locale = await getLocale();
+  const t = await getTranslations();
 
   return (
     <html lang={locale} className="dark">
       <head>
         {/* Add this line to satisfy the HTML-inspection rule */}
-        <title>CS Skins&nbsp;- Game Item Marketplace</title>
+        <title>{t('site.title')}</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

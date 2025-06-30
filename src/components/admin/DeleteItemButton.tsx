@@ -16,6 +16,7 @@ import {
 import { Trash2, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { deleteItemAction } from '@/lib/actions';
+import { useTranslations } from 'next-intl';
 
 interface DeleteItemButtonProps {
   itemId: string;
@@ -25,21 +26,22 @@ interface DeleteItemButtonProps {
 export function DeleteItemButton({ itemId, itemName }: DeleteItemButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const t = useTranslations('adminItems.deleteButton');
 
   const handleDelete = async () => {
     setIsLoading(true);
     const result = await deleteItemAction(itemId);
     if (result.success) {
       toast({
-        title: 'Item Deleted',
-        description: `"${itemName}" has been successfully deleted.`,
+        title: t('itemDeleted'),
+        description: t('deleteSuccess', { name: itemName }),
       });
       // Revalidation is handled by the server action
     } else {
       toast({
         variant: 'destructive',
-        title: 'Deletion Failed',
-        description: result.message || 'An error occurred.',
+        title: t('deletionFailed'),
+        description: result.message || t('errorOccurred'),
       });
     }
     setIsLoading(false);
@@ -48,7 +50,7 @@ export function DeleteItemButton({ itemId, itemName }: DeleteItemButtonProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" size="icon" title="Delete Item" disabled={isLoading}>
+        <Button variant="destructive" size="icon" title={t('tooltip')} disabled={isLoading}>
           {isLoading ? (
             <Loader2 className="h-4 w-4 animate-spin" />
           ) : (
@@ -58,20 +60,20 @@ export function DeleteItemButton({ itemId, itemName }: DeleteItemButtonProps) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>{t('confirmTitle')}</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the item "{itemName}".
+            {t('confirmDescription', { name: itemName })}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isLoading}>{t('cancel')}</AlertDialogCancel>
           <AlertDialogAction
             onClick={handleDelete}
             disabled={isLoading}
             className="bg-destructive hover:bg-destructive/90"
           >
             {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-            Confirm Delete
+            {t('confirmDelete')}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

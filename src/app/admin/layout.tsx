@@ -5,7 +5,7 @@ import { PanelLeft } from 'lucide-react';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   // Authentication is handled by middleware.ts for /admin/* routes.
-  // If middleware allows access, it means user is authenticated.
+  // If middleware allows access, it means the user is authenticated.
 
   return (
     <SidebarProvider defaultOpen>

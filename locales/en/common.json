@@ -1,6 +1,6 @@
 {
   "site": {
-    "title": "ItemDrop - Game Item Marketplace",
+    "title": "CS Skins - Game Item Marketplace",
     "description": "List and find game items for sale."
   },
   "header": {
@@ -16,5 +16,168 @@
     "welcome": "Welcome to CS Skins!",
     "browse": "Browse our collection of legendary game items. Contact us to purchase.",
     "noItems": "No items currently available. Check back soon!"
+  },
+  "adminSidebar": {
+    "title": "ItemDrop Admin",
+    "dashboard": "Dashboard",
+    "manageItems": "Manage Items",
+    "manageUsers": "Manage Users",
+    "settings": "Settings",
+    "addNewItem": "Add New Item",
+    "logout": "Logout",
+    "logoutTitle": "Logged Out",
+    "logoutDescription": "You have been successfully logged out."
+  },
+  "adminDashboard": {
+    "welcomePrefix": "Welcome,",
+    "welcomeSuffix": "!",
+    "defaultAdmin": "Admin",
+    "manageDescription": "Manage your game item listings and site settings from here.",
+    "centralHub": "This is your central hub for managing ItemDrop. Use the navigation oscuro to explore different sections.",
+    "manageItemsTitle": "Manage Items",
+    "itemListingsTitle": "Item Listings",
+    "itemListingsDescription": "View, edit, or delete existing items.",
+    "goToItems": "Go to Items",
+    "addNewItemTitle": "Add New Item",
+    "createItemTitle": "Create Item",
+    "addItemDescription": "Add a new game item to your catalog.",
+    "addItem": "Add Item",
+    "userManagementTitle": "User Management",
+    "comingSoonTitle": "Coming Soon",
+    "userManagementDescription": "Manage user accounts and roles.",
+    "viewUsers": "View Users"
+  },
+  "adminEditItem": {
+    "itemNotFound": "Item Not Found",
+    "itemNotFoundDescription": "The item you are trying to edit does not exist.",
+    "backToItems": "Back to Items",
+    "editItemTitle": "Edit Item: {name}",
+    "editItemDescription": "Modify the details of the game item.",
+    "editItemDetailsTitle": "Edit Item Details",
+    "editItemDetailsDescription": "Update the information for \"{name}\"."
+  },
+  "adminItems": {
+    "pageTitle": "Manage Items",
+    "pageDescription": "View, edit, or add new game items.",
+    "addNewItem": "Add New Item",
+    "itemListingsTitle": "Item Listings",
+    "itemListingsDescription": "A list of all items currently in the system.",
+    "tableImage": "Image",
+    "tableName": "Name",
+    "tableCategory": "Category",
+    "tablePrice": "Price",
+    "tableActions": "Actions",
+    "currency": "Gold",
+    "editItemTooltip": "Edit Item",
+    "noItemsFound": "No items found.",
+    "noItemsDescription": "Get started by adding a new item.",
+    "deleteButton": {
+      "tooltip": "Delete Item",
+      "itemDeleted": "Item Deleted",
+      "deletionFailed": "Deletion Failed",
+      "errorOccurred": "An error occurred.",
+      "deleteSuccess": "\"{name}\" has been successfully deleted.",
+      "confirmTitle": "Are you absolutely sure?",
+      "confirmDescription": "This action cannot be undone. This will permanently delete the item \"{name}\".",
+      "cancel": "Cancel",
+      "confirmDelete": "Confirm Delete"
+    }
+  },
+  "adminItemForm": {
+    "labels": {
+      "name": "Item Name",
+      "shortDescription": "Short Description",
+      "longDescription": "Long Description (Optional)",
+      "price": "Price (Gold)",
+      "category": "Category",
+      "imageUrl": "Image URL (Optional - will be auto-generated if left empty or placeholder)"
+    },
+    "placeholders": {
+      "name": "Excalibur",
+      "shortDescription": "A legendary sword of immense power.",
+      "longDescription": "Detailed lore and attributes of the item...",
+      "price": "10000",
+      "category": "Weapon, Armor, Potion",
+      "imageUrl": "Leave empty or https://placehold.co/600x400.png to auto-generate"
+    },
+    "validation": {
+      "nameLength": "Name must be at least 3 characters long.",
+      "descriptionLength": "Description must be at least 10 characters long.",
+      "positivePrice": "Price must be a positive number.",
+      "validUrl": "Please enter a valid URL.",
+      "requiredCategory": "Category is required.",
+      "formErrors": "Please correct the errors in the form."
+    },
+    "buttons": {
+      "saving": "Saving...",
+      "creating": "Creating...",
+      "saveChanges": "Save Changes",
+      "createItem": "Create Item",
+      "deleting": "Deleting...",
+      "deleteItem": "Delete Item",
+      "cancel": "Cancel",
+      "confirmDelete": "Confirm Delete"
+    },
+    "messages": {
+      "updateSuccess": "Update Successful",
+      "createSuccess": "Creation Successful",
+      "updateFailed": "Update Failed",
+      "createFailed": "Creation Failed",
+      "errorOccurred": "An error occurred.",
+      "validationError": "Validation Error",
+      "itemDeleted": "Item Deleted",
+      "deletionFailed": "Deletion Failed",
+      "imageAutoGenerate": "An image will be auto-generated upon saving if this field is empty or a placeholder."
+    },
+    "deleteConfirmation": {
+      "title": "Are you sure?",
+      "description": "This action cannot be undone. This will permanently delete the item \"{name}\"."
+    }
+  },
+  "adminLogin": {
+    "title": "Admin Login",
+    "description": "Enter your credentials to access the admin panel.",
+    "labels": {
+      "username": "Username",
+      "password": "Password"
+    },
+    "placeholders": {
+      "username": "admin",
+      "password": "••••••••"
+    },
+    "validation": {
+      "usernameRequired": "Username is required.",
+      "passwordRequired": "Password is required."
+    },
+    "buttons": {
+      "login": "Login",
+      "loggingIn": "Logging in..."
+    },
+    "messages": {
+      "loginSuccess": "Login Successful",
+      "redirecting": "Redirecting to admin dashboard...",
+      "loginFailed": "Login Failed",
+      "unknownError": "An unknown error occurred.",
+      "loginError": "Login Error",
+      "unexpectedError": "An unexpected error occurred. Please try again."
+    }
+  },
+  "adminNewItem": {
+    "pageTitle": "Add New Item",
+    "pageDescription": "Fill in the details for the new game item.",
+    "backToItems": "Back to Items",
+    "detailsTitle": "New Item Details",
+    "detailsDescription": "Provide all necessary information for the item."
+  },
+  "itemCard": {
+    "viewDetails": "View Details",
+    "currency": "VND"
+  },
+  "itemDetail": {
+    "notFound": "Item Not Found",
+    "notFoundDescription": "The item you are looking for does not exist.",
+    "backToListings": "Back to Listings",
+    "currency": "Gold",
+    "contactInfo": "To purchase this item, please contact us directly."
   }
 }

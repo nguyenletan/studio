@@ -31,7 +31,7 @@ export default async function EditItemPage({ params }: { params: { id: string } 
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-headline text-3xl font-bold">Edit Item: {item.name}</h1>
+          <h1 className="font-headline text-3xl font-bold">Edit Item: {item?.name}</h1>
           <p className="text-muted-foreground">Modify the details of the game item.</p>
         </div>
         <Button variant="outline" asChild>
@@ -43,7 +43,7 @@ export default async function EditItemPage({ params }: { params: { id: string } 
       <Card>
         <CardHeader>
           <CardTitle>Edit Item Details</CardTitle>
-          <CardDescription>Update the information for "{item.name}".</CardDescription>
+          <CardDescription>Update the information for "{item?.name}".</CardDescription>
         </CardHeader>
         <CardContent>
           <ItemForm

@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export default async function EditItemPage({ params }: { params: { id: string } }) {
-  const item: Item | undefined = await getItemById(params.id);
+  const item: Item | null | undefined = await getItemById(params.id);
 
   if (!item) {
     return (

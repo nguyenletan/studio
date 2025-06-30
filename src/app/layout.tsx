@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getTranslations } from 'next-intl/server';
 import React from 'react';
+import { Analytics } from '@vercel/analytics/next';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -37,6 +38,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <Toaster />
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

@@ -6,6 +6,7 @@
   "header": {
     "home": "Home",
     "admin": "Admin",
+    "contact": "Contact Us",
     "language": "Language"
   },
   "languageSelector": {
@@ -18,7 +19,7 @@
     "noItems": "No items currently available. Check back soon!"
   },
   "adminSidebar": {
-    "title": "ItemDrop Admin",
+    "title": "CS Skins Admin",
     "dashboard": "Dashboard",
     "manageItems": "Manage Items",
     "manageUsers": "Manage Users",
@@ -33,7 +34,7 @@
     "welcomeSuffix": "!",
     "defaultAdmin": "Admin",
     "manageDescription": "Manage your game item listings and site settings from here.",
-    "centralHub": "This is your central hub for managing ItemDrop. Use the navigation oscuro to explore different sections.",
+    "centralHub": "This is your central hub for managing CS Skins. Use the navigation oscuro to explore different sections.",
     "manageItemsTitle": "Manage Items",
     "itemListingsTitle": "Item Listings",
     "itemListingsDescription": "View, edit, or delete existing items.",
@@ -179,5 +180,56 @@
     "backToListings": "Back to Listings",
     "currency": "Gold",
     "contactInfo": "To purchase this item, please contact us directly."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Have questions or need assistance? Reach out to us using the form below or through our contact information.",
+    "formTitle": "Send Us a Message",
+    "formDescription": "Fill out the form below and we'll get back to you as soon as possible.",
+    "contactInfo": "Contact Information",
+    "address": "123 Game Street, Digital City",
+    "email": "contact@csskins.com",
+    "phone": "+1 (555) 123-4567",
+    "businessHours": "Business Hours",
+    "businessHoursDetails": "Monday - Friday: 9AM - 5PM",
+    "form": {
+      "labels": {
+        "name": "Your Name",
+        "email": "Your Email",
+        "phone": "Your Phone Number",
+        "phoneSecondary": "Alternative Phone Number (Optional)",
+        "subject": "Subject",
+        "message": "Message",
+        "contactMethodNote": "(Email or phone required)"
+      },
+      "placeholders": {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phone": "+1 (555) 123-4567",
+        "phoneSecondary": "+1 (555) 987-6543",
+        "subject": "Item Inquiry",
+        "message": "I'm interested in purchasing..."
+      },
+      "validation": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailValid": "Please enter a valid email address",
+        "phoneRequired": "Phone number is required",
+        "contactMethodRequired": "Please provide either an email or phone number",
+        "subjectRequired": "Subject is required",
+        "messageRequired": "Message is required",
+        "messageLength": "Message must be at least 10 characters"
+      },
+      "buttons": {
+        "submit": "Send Message",
+        "sending": "Sending..."
+      },
+      "messages": {
+        "success": "Message Sent",
+        "successDescription": "Thank you for your message. We'll get back to you soon.",
+        "error": "Error",
+        "errorDescription": "There was an error sending your message. Please try again."
+      }
+    }
   }
 }

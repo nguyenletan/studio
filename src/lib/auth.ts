@@ -3,7 +3,7 @@ import type { AdminUser } from '@/types';
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'password123';
-const SESSION_COOKIE_NAME = 'itemdrop_session';
+const SESSION_COOKIE_NAME = 'csskins_session';
 
 export async function login(
   username?: string,

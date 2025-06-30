@@ -6,6 +6,7 @@
   "header": {
     "home": "Trang Chủ",
     "admin": "Quản Trị",
+    "contact": "Liên Hệ",
     "language": "Ngôn Ngữ"
   },
   "languageSelector": {
@@ -18,7 +19,7 @@
     "noItems": "Hiện không có vật phẩm nào. Vui lòng quay lại sau!"
   },
   "adminSidebar": {
-    "title": "Quản Trị ItemDrop",
+    "title": "Quản Trị CS Skins",
     "dashboard": "Bảng Điều Khiển",
     "manageItems": "Quản Lý Vật Phẩm",
     "manageUsers": "Quản Lý Người Dùng",
@@ -33,7 +34,7 @@
     "welcomeSuffix": "!",
     "defaultAdmin": "Quản trị viên",
     "manageDescription": "Quản lý danh sách vật phẩm game và cài đặt trang web từ đây.",
-    "centralHub": "Đây là trung tâm quản lý ItemDrop của bạn. Sử dụng thanh điều hướng để khám phá các phần khác nhau.",
+    "centralHub": "Đây là trung tâm quản lý CS Skins của bạn. Sử dụng thanh điều hướng để khám phá các phần khác nhau.",
     "manageItemsTitle": "Quản Lý Vật Phẩm",
     "itemListingsTitle": "Danh Sách Vật Phẩm",
     "itemListingsDescription": "Xem, chỉnh sửa hoặc xóa các vật phẩm hiện có.",
@@ -179,5 +180,56 @@
     "backToListings": "Quay Lại Danh Sách",
     "currency": "Vàng",
     "contactInfo": "Để mua vật phẩm này, vui lòng liên hệ trực tiếp với chúng tôi."
+  },
+  "contact": {
+    "title": "Liên Hệ",
+    "description": "Bạn có câu hỏi hoặc cần hỗ trợ? Hãy liên hệ với chúng tôi qua biểu mẫu dưới đây hoặc thông qua thông tin liên hệ của chúng tôi.",
+    "formTitle": "Gửi Tin Nhắn Cho Chúng Tôi",
+    "formDescription": "Điền vào biểu mẫu dưới đây và chúng tôi sẽ liên hệ lại với bạn sớm nhất có thể.",
+    "contactInfo": "Thông Tin Liên Hệ",
+    "address": "123 Đường Game, Thành Phố Số",
+    "email": "contact@csskins.com",
+    "phone": "+1 (555) 123-4567",
+    "businessHours": "Giờ Làm Việc",
+    "businessHoursDetails": "Thứ Hai - Thứ Sáu: 9 giờ sáng - 5 giờ chiều",
+    "form": {
+      "labels": {
+        "name": "Tên Của Bạn",
+        "email": "Email Của Bạn",
+        "phone": "Số Điện Thoại Của Bạn",
+        "phoneSecondary": "Số Điện Thoại Khác (Tùy Chọn)",
+        "subject": "Chủ Đề",
+        "message": "Tin Nhắn",
+        "contactMethodNote": "(Email hoặc số điện thoại bắt buộc)"
+      },
+      "placeholders": {
+        "name": "Nguyễn Văn A",
+        "email": "nguyenvana@example.com",
+        "phone": "0912 345 678",
+        "phoneSecondary": "0987 654 321",
+        "subject": "Hỏi Về Vật Phẩm",
+        "message": "Tôi quan tâm đến việc mua..."
+      },
+      "validation": {
+        "nameRequired": "Tên là bắt buộc",
+        "emailRequired": "Email là bắt buộc",
+        "emailValid": "Vui lòng nhập địa chỉ email hợp lệ",
+        "phoneRequired": "Số điện thoại là bắt buộc",
+        "contactMethodRequired": "Vui lòng cung cấp email hoặc số điện thoại",
+        "subjectRequired": "Chủ đề là bắt buộc",
+        "messageRequired": "Tin nhắn là bắt buộc",
+        "messageLength": "Tin nhắn phải có ít nhất 10 ký tự"
+      },
+      "buttons": {
+        "submit": "Gửi Tin Nhắn",
+        "sending": "Đang Gửi..."
+      },
+      "messages": {
+        "success": "Đã Gửi Tin Nhắn",
+        "successDescription": "Cảm ơn bạn đã gửi tin nhắn. Chúng tôi sẽ liên hệ lại với bạn sớm.",
+        "error": "Lỗi",
+        "errorDescription": "Đã xảy ra lỗi khi gửi tin nhắn của bạn. Vui lòng thử lại."
+      }
+    }
   }
 }

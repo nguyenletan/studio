@@ -5,13 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { adminLogout } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import {
-  LayoutDashboard,
-  Package,
-  PlusCircle,
-  LogOut,
-  Gamepad2,
-} from 'lucide-react';
+import { LayoutDashboard, Package, PlusCircle, LogOut, Gamepad2 } from 'lucide-react';
 import {
   Sidebar,
   SidebarHeader,

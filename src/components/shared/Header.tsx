@@ -21,6 +21,9 @@ export function Header() {
             <Link href="/">{t('header.home')}</Link>
           </Button>
           <Button variant="ghost" asChild>
+            <Link href="/contact">{t('header.contact')}</Link>
+          </Button>
+          <Button variant="ghost" asChild>
             <Link href="/admin">{t('header.admin')}</Link>
           </Button>
           <LanguageSelector />

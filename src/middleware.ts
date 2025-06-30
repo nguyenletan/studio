@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { isAuthenticated } from '@/lib/auth'; // We need a way to check this without cookies() directly in middleware
+//import { isAuthenticated } from '@/lib/auth'; // We need a way to check this without cookies() directly in middleware
 
-const SESSION_COOKIE_NAME = 'itemdrop_session';
+const SESSION_COOKIE_NAME = 'csskins_session';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

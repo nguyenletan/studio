@@ -1,4 +1,4 @@
-# **App Name**: ItemDrop
+# **App Name**: CS Skins
 
 ## Core Features:
 

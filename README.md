@@ -1,4 +1,4 @@
-# ItemDrop - Fantasy Game Item Marketplace
+# CS SKins - Fantasy Game Item Marketplace
 
 This is a Next.js starter project for a fantasy game item marketplace, built with Firebase Studio. It uses Next.js, React, ShadCN UI components, Tailwind CSS, Prisma for database interaction with PostgreSQL, and Genkit for AI features.
 

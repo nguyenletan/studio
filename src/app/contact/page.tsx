@@ -3,7 +3,7 @@ import { Footer } from '@/components/shared/Footer';
 import { ContactForm } from '@/components/shared/ContactForm';
 import { getTranslations } from 'next-intl/server';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mail, MapPin, Phone, Clock } from 'lucide-react';
+import { Mail, MapPin, Phone, Clock, MessageCircle, Send } from 'lucide-react';
 
 export async function generateMetadata() {
   const t = await getTranslations();
@@ -21,6 +21,8 @@ export default async function ContactPage() {
   const email = process.env.NEXT_EMAIL || '';
   const phone = process.env.NEXT_TEL_NUM || '';
   const phone2 = process.env.NEXT_TEL_NUM2 || '';
+  const facebookMessenger = process.env.NEXT_FACEBOOK_MESSENGER || '';
+  const telegram = process.env.NEXT_TELEGRAM || '';
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -84,6 +86,26 @@ export default async function ContactPage() {
                   </p>
                 </div>
               </div>
+
+              {facebookMessenger && (
+                <div className="flex items-start space-x-4">
+                  <MessageCircle className="mt-1 h-5 w-5 text-primary" />
+                  <div>
+                    <h3 className="font-medium">Facebook Messenger</h3>
+                    <p className="text-sm text-muted-foreground">{facebookMessenger}</p>
+                  </div>
+                </div>
+              )}
+
+              {telegram && (
+                <div className="flex items-start space-x-4">
+                  <Send className="mt-1 h-5 w-5 text-primary" />
+                  <div>
+                    <h3 className="font-medium">Telegram</h3>
+                    <p className="text-sm text-muted-foreground">{telegram}</p>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

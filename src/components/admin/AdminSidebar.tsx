@@ -47,7 +47,7 @@ export function AdminSidebar() {
           href="/"
           className="flex items-center space-x-2 group-data-[collapsible=icon]:justify-center"
         >
-          <Gamepad2 className="h-8 w-8 text-primary" />
+          <Gamepad2 className="text-primary h-8 w-8" />
           <span className="font-headline text-xl font-bold group-data-[collapsible=icon]:hidden">
             {t('adminSidebar.title')}
           </span>

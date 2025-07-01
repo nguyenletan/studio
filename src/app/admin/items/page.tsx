@@ -92,11 +92,11 @@ export default async function AdminItemsPage() {
             </Table>
           ) : (
             <div className="py-12 text-center">
-              <PackageSearch className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-              <p className="text-xl font-semibold text-muted-foreground">
+              <PackageSearch className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
+              <p className="text-muted-foreground text-xl font-semibold">
                 {t('adminItems.noItemsFound')}
               </p>
-              <p className="text-sm text-muted-foreground">{t('adminItems.noItemsDescription')}</p>
+              <p className="text-muted-foreground text-sm">{t('adminItems.noItemsDescription')}</p>
               <Button asChild className="mt-4">
                 <Link href="/admin/items/new">
                   <PlusCircle className="mr-2 h-4 w-4" /> {t('adminItems.addNewItem')}

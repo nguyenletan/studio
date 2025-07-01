@@ -262,7 +262,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
                 </div>
               )}
               {!previewUrl && !field.value && (
-                <div className="mt-2 rounded-md border border-dashed p-4 text-center text-muted-foreground">
+                <div className="text-muted-foreground mt-2 rounded-md border border-dashed p-4 text-center">
                   <Images className="mx-auto mb-2 h-10 w-10" />
                   <p>{t('messages.imageAutoGenerate')}</p>
                 </div>
@@ -272,7 +272,7 @@ export function ItemForm({ item, formAction, deleteAction, isEditMode }: ItemFor
         />
 
         {formState?.errors?._form && (
-          <FormMessage className="rounded-md bg-destructive p-3 text-destructive-foreground">
+          <FormMessage className="bg-destructive text-destructive-foreground rounded-md p-3">
             {formState.errors._form.join(', ')}
           </FormMessage>
         )}

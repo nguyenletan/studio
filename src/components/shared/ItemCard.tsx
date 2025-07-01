@@ -35,12 +35,12 @@ export function ItemCard({ item }: ItemCardProps) {
       </CardHeader>
       <CardContent className="flex-grow p-4">
         <CardTitle className="font-headline mb-2 text-xl">{item.name}</CardTitle>
-        <CardDescription className="line-clamp-3 text-sm text-muted-foreground">
+        <CardDescription className="text-muted-foreground line-clamp-3 text-sm">
           {item.description}
         </CardDescription>
       </CardContent>
       <CardFooter className="flex items-center justify-between p-4 pt-0">
-        <p className="text-lg font-semibold text-primary">
+        <p className="text-primary text-lg font-semibold">
           {item.price.toLocaleString()} {t('currency')}
         </p>
         <Button asChild variant="outline" size="sm">

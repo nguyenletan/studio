@@ -34,7 +34,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         />
       </head>
 
-      <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
+      <body className="bg-background text-foreground flex min-h-screen flex-col font-sans antialiased">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <Toaster />
         <SpeedInsights />

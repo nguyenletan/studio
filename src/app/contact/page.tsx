@@ -28,10 +28,10 @@ export default async function ContactPage() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="container mx-auto max-w-7xl flex-grow py-8">
-        <h1 className="font-headline mb-8 text-center text-4xl font-bold text-primary">
+        <h1 className="font-headline text-primary mb-8 text-center text-4xl font-bold">
           {t('contact.title')}
         </h1>
-        <p className="mb-12 text-center text-lg text-muted-foreground">
+        <p className="text-muted-foreground mb-12 text-center text-lg">
           {t('contact.description')}
         </p>
 
@@ -55,21 +55,21 @@ export default async function ContactPage() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="flex items-start space-x-4">
-                <MapPin className="mt-1 h-5 w-5 text-primary" />
+                <MapPin className="text-primary mt-1 h-5 w-5" />
                 <div>
                   <h3 className="font-medium">{address}</h3>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <Mail className="mt-1 h-5 w-5 text-primary" />
+                <Mail className="text-primary mt-1 h-5 w-5" />
                 <div>
                   <h3 className="font-medium">{email}</h3>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <Phone className="mt-1 h-5 w-5 text-primary" />
+                <Phone className="text-primary mt-1 h-5 w-5" />
                 <div>
                   <h3 className="font-medium">
                     {phone} - {phone2}
@@ -78,10 +78,10 @@ export default async function ContactPage() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <Clock className="mt-1 h-5 w-5 text-primary" />
+                <Clock className="text-primary mt-1 h-5 w-5" />
                 <div>
                   <h3 className="font-medium">{t('contact.businessHours')}</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     {t('contact.businessHoursDetails')}
                   </p>
                 </div>
@@ -89,20 +89,20 @@ export default async function ContactPage() {
 
               {facebookMessenger && (
                 <div className="flex items-start space-x-4">
-                  <MessageCircle className="mt-1 h-5 w-5 text-primary" />
+                  <MessageCircle className="text-primary mt-1 h-5 w-5" />
                   <div>
                     <h3 className="font-medium">Facebook Messenger</h3>
-                    <p className="text-sm text-muted-foreground">{facebookMessenger}</p>
+                    <p className="text-muted-foreground text-sm">{facebookMessenger}</p>
                   </div>
                 </div>
               )}
 
               {telegram && (
                 <div className="flex items-start space-x-4">
-                  <Send className="mt-1 h-5 w-5 text-primary" />
+                  <Send className="text-primary mt-1 h-5 w-5" />
                   <div>
                     <h3 className="font-medium">Telegram</h3>
-                    <p className="text-sm text-muted-foreground">{telegram}</p>
+                    <p className="text-muted-foreground text-sm">{telegram}</p>
                   </div>
                 </div>
               )}

@@ -34,7 +34,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
         <Header />
         <main className="container flex flex-grow flex-col items-center justify-center py-8">
           <h1 className="mb-4 text-4xl font-bold">{t('itemDetail.notFound')}</h1>
-          <p className="mb-8 text-muted-foreground">{t('itemDetail.notFoundDescription')}</p>
+          <p className="text-muted-foreground mb-8">{t('itemDetail.notFoundDescription')}</p>
           <Button asChild>
             <Link href="/">
               <ArrowLeft className="mr-2 h-4 w-4" /> {t('itemDetail.backToListings')}
@@ -49,13 +49,13 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
   const categoryIcon = (category: string) => {
     switch (category.toLowerCase()) {
       case 'weapon':
-        return <Gem className="h-5 w-5 text-primary" />;
+        return <Gem className="text-primary h-5 w-5" />;
       case 'armor':
-        return <Shield className="h-5 w-5 text-primary" />;
+        return <Shield className="text-primary h-5 w-5" />;
       case 'potion':
-        return <ScrollText className="h-5 w-5 text-primary" />; // Using ScrollText for potion
+        return <ScrollText className="text-primary h-5 w-5" />; // Using ScrollText for potion
       default:
-        return <Tag className="h-5 w-5 text-primary" />;
+        return <Tag className="text-primary h-5 w-5" />;
     }
   };
 
@@ -84,7 +84,7 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
             </div>
             <div className="flex flex-col p-6 md:p-8">
               <CardHeader className="mb-4 p-0">
-                <CardTitle className="font-headline text-4xl font-bold text-primary">
+                <CardTitle className="font-headline text-primary text-4xl font-bold">
                   {item.name}
                 </CardTitle>
               </CardHeader>
@@ -95,20 +95,20 @@ export default async function ItemDetailPage({ params }: { params: { id: string 
                     {item.category}
                   </Badge>
                 </div>
-                <p className="mb-6 text-2xl font-semibold text-accent">
+                <p className="text-accent mb-6 text-2xl font-semibold">
                   {item.price.toLocaleString()} {t('itemDetail.currency')}
                 </p>
-                <CardDescription className="mb-4 text-base text-foreground">
+                <CardDescription className="text-foreground mb-4 text-base">
                   {item.description}
                 </CardDescription>
                 {item.longDescription && (
-                  <div className="prose prose-sm prose-invert max-w-none text-muted-foreground">
+                  <div className="prose prose-sm prose-invert text-muted-foreground max-w-none">
                     <p>{item.longDescription}</p>
                   </div>
                 )}
               </CardContent>
               <div className="mt-8 p-0">
-                <p className="text-sm text-muted-foreground">{t('itemDetail.contactInfo')}</p>
+                <p className="text-muted-foreground text-sm">{t('itemDetail.contactInfo')}</p>
               </div>
             </div>
           </div>

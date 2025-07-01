@@ -32,11 +32,11 @@ export default async function AdminDashboardPage() {
             <CardTitle className="text-sm font-medium">
               {t('adminDashboard.manageItemsTitle')}
             </CardTitle>
-            <Package className="h-5 w-5 text-muted-foreground" />
+            <Package className="text-muted-foreground h-5 w-5" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{t('adminDashboard.itemListingsTitle')}</div>
-            <p className="mb-4 text-xs text-muted-foreground">
+            <p className="text-muted-foreground mb-4 text-xs">
               {t('adminDashboard.itemListingsDescription')}
             </p>
             <Button asChild size="sm">
@@ -50,11 +50,11 @@ export default async function AdminDashboardPage() {
             <CardTitle className="text-sm font-medium">
               {t('adminDashboard.addNewItemTitle')}
             </CardTitle>
-            <PlusCircle className="h-5 w-5 text-muted-foreground" />
+            <PlusCircle className="text-muted-foreground h-5 w-5" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{t('adminDashboard.createItemTitle')}</div>
-            <p className="mb-4 text-xs text-muted-foreground">
+            <p className="text-muted-foreground mb-4 text-xs">
               {t('adminDashboard.addItemDescription')}
             </p>
             <Button asChild size="sm" variant="outline">

@@ -9,10 +9,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <SidebarProvider defaultOpen>
-      <div className="flex min-h-screen bg-background">
+      <div className="bg-background flex min-h-screen">
         <AdminSidebar />
         <SidebarInset className="flex flex-1 flex-col">
-          <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-6 backdrop-blur md:hidden">
+          <header className="bg-background/80 sticky top-0 z-10 flex h-16 items-center gap-4 border-b px-6 backdrop-blur md:hidden">
             {/* Mobile Sidebar Trigger - using ShadCN's example */}
             <SidebarTrigger asChild>
               <Button size="icon" variant="outline" className="md:hidden">

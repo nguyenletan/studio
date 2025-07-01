@@ -10,10 +10,10 @@ export default async function AdminLoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-background to-primary/10 p-4">
-      <div className="absolute left-8 top-8 flex items-center space-x-2 text-primary-foreground">
-        <Gamepad2 className="h-10 w-10 text-primary" />
-        <span className="font-headline text-2xl font-bold text-primary">Cs Skins</span>
+    <div className="from-background to-primary/10 flex min-h-screen flex-col items-center justify-center bg-gradient-to-br p-4">
+      <div className="text-primary-foreground absolute top-8 left-8 flex items-center space-x-2">
+        <Gamepad2 className="text-primary h-10 w-10" />
+        <span className="font-headline text-primary text-2xl font-bold">Cs Skins</span>
       </div>
       <LoginForm />
     </div>
